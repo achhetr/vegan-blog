@@ -5,7 +5,9 @@ const HomePage = (props) => {
 	return (
 		<div>
 			<h2>Home Pages</h2>
-			<BlogComponent blogList={props.blogList} />
+			{props.blogList.length > 0 && (
+				<BlogComponent blogList={props.blogList} />
+			)}
 		</div>
 	);
 };
