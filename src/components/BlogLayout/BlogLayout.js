@@ -5,6 +5,10 @@ const BlogLayout = (props) => {
 		<div>
 			<h3>{props.blog.title}</h3>
 			<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
+			<img
+				src={props.blog.imageUploaded}
+				alt={props.blog.imageUploaded}
+			/>
 		</div>
 	);
 };

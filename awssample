@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Id": "Policy1601447194255",
+    "Statement": [
+        {
+            "Sid": "Stmt1601447189742",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::229595614191:user/akash-vegan-blog"
+            },
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::vegan-blog-image-bucket/*"
+        }
+    ]
+}
