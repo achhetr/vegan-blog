@@ -25,6 +25,8 @@ yarn-error.log*
 # Local Netlify folder
 .netlify
 
+awssample
+
 .env
 
 yarn.lock
