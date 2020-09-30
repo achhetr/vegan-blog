@@ -7,7 +7,7 @@
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
 		"browser-image-compression": "^1.0.12",
-		"node-env": "^0.1.6",
+		"dotenv": "^8.2.0",
 		"node-sass": "^4.14.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
