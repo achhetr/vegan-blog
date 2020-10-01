@@ -1,31 +1,38 @@
 import React, { useState } from 'react';
+import { uploadFile } from 'react-s3';
+import { Redirect } from 'react-router-dom';
 
 import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
-import { Redirect } from 'react-router-dom';
-import ImageUpload from '../ImageUpload/ImageUpload';
+import CONFIG from '../../config/config';
+import ImageGetter from '../ImageGetter/ImageGetter';
 
 const CreateBlog = (props) => {
 	const [title, setTitle] = useState('');
 	const [blogBody, setBlogBody] = useState('');
 	const [redirect, setRedirect] = useState(false);
-	const [imageUploaded, setImageUploaded] = useState('');
+	const [imageUploaded, setImageUploaded] = useState(null);
 
 	const resetHandler = () => {
-		setTitle();
-		setBlogBody();
+		setTitle('');
+		setBlogBody('');
 		setRedirect(true);
+		setImageUploaded(null);
 	};
 
-	const handleCreatePost = (e) => {
+	const handleCreatePost = async (e) => {
 		e.preventDefault();
-		console.log(imageUploaded);
 		if (!!title && !!blogBody && !!imageUploaded) {
-			props.addBlogListHandler({
-				title,
-				blogBody,
-				imageUploaded,
-			});
-			resetHandler();
+			try {
+				const resp = await uploadFile(imageUploaded, CONFIG);
+				props.addBlogListHandler({
+					title,
+					blogBody,
+					imageUploaded: resp.location,
+				});
+				resetHandler();
+			} catch (error) {
+				console.log(error);
+			}
 		}
 	};
 
@@ -50,7 +57,7 @@ const CreateBlog = (props) => {
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder="Enter blog title"
 					/>
-					<ImageUpload uploadHandler={uploadHandler} />
+					<ImageGetter uploadHandler={uploadHandler} />
 					<BlogRichEditor enterBlogBody={enterBlogBody} />
 					<input value="create" type="submit" />
 					<input

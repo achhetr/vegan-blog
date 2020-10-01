@@ -1,10 +1,7 @@
 import React from 'react';
-import { uploadFile } from 'react-s3';
 import imageCompression from 'browser-image-compression';
 
-import CONFIG from '../../config/config';
-
-const ImageUpload = (props) => {
+const ImageGetter = (props) => {
 	const handleImageUpload = async (e) => {
 		const file = e.target.files[0];
 		const options = {
@@ -15,8 +12,7 @@ const ImageUpload = (props) => {
 
 		try {
 			const compressedFile = await imageCompression(file, options);
-			const resp = await uploadFile(compressedFile, CONFIG);
-			props.uploadHandler(resp.location);
+			props.uploadHandler(compressedFile);
 		} catch (error) {
 			console.log(error);
 		}
@@ -33,4 +29,4 @@ const ImageUpload = (props) => {
 	);
 };
 
-export default ImageUpload;
+export default ImageGetter;
