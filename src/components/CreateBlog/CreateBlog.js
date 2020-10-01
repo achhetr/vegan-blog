@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Spinner from 'react-spinner-material';
 import { uploadFile } from 'react-s3';
 import { Redirect } from 'react-router-dom';
 
@@ -11,16 +12,19 @@ const CreateBlog = (props) => {
 	const [blogBody, setBlogBody] = useState('');
 	const [redirect, setRedirect] = useState(false);
 	const [imageUploaded, setImageUploaded] = useState(null);
+	const [loadingSpinner, setLoadingSpinner] = useState(false);
 
 	const resetHandler = () => {
 		setTitle('');
 		setBlogBody('');
 		setRedirect(true);
 		setImageUploaded(null);
+		setLoadingSpinner(false);
 	};
 
 	const handleCreatePost = async (e) => {
 		e.preventDefault();
+		setLoadingSpinner(true);
 		if (!!title && !!blogBody && !!imageUploaded) {
 			try {
 				const resp = await uploadFile(imageUploaded, CONFIG);
@@ -44,6 +48,17 @@ const CreateBlog = (props) => {
 		setImageUploaded(image);
 	};
 
+	if (loadingSpinner)
+		return (
+			<div>
+				<Spinner
+					size={120}
+					spinnerColor={'#333'}
+					spinnerWidth={2}
+					visible={true}
+				/>
+			</div>
+		);
 	if (redirect) return <Redirect to="/" />;
 
 	return (
