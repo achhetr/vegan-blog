@@ -4,6 +4,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import CreateBlog from '../CreateBlog/CreateBlog';
 import HomePage from '../HomePage/HomePage';
+import UserInfo from '../UserInfo/UserInfo';
+import Footer from '../Footer/Footer';
 
 const MainApp = () => {
 	const [blogList, setBlogList] = useState([
@@ -24,16 +26,26 @@ const MainApp = () => {
 			<div>
 				<Header />
 				<div className="app-container-width">
-					<Switch>
-						<Route exact path="/">
-							<HomePage blogList={blogList} />
-						</Route>
-						<Route path="/create">
-							<CreateBlog
-								addBlogListHandler={addBlogListHandler}
-							/>
-						</Route>
-					</Switch>
+					<div className="app-container__section">
+						<div className="app-container__section--container app-container__section--left">
+							<UserInfo />
+						</div>
+						<div className="app-container__section--container app-container__section--mainpage">
+							<Switch>
+								<Route exact path="/">
+									<HomePage blogList={blogList} />
+								</Route>
+								<Route path="/create">
+									<CreateBlog
+										addBlogListHandler={addBlogListHandler}
+									/>
+								</Route>
+							</Switch>
+						</div>
+						<div className="app-container__section--container app-container__section--right">
+							<Footer />
+						</div>
+					</div>
 				</div>
 			</div>
 		</BrowserRouter>
