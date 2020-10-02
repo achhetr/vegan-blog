@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Spinner from 'react-spinner-material';
-import { uploadFile } from 'react-s3';
+// import { uploadFile } from 'react-s3';
 import { Redirect } from 'react-router-dom';
 
 import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
-import CONFIG from '../../config/config';
+// import CONFIG from '../../config/config';
 import ImageGetter from '../ImageGetter/ImageGetter';
 
 const CreateBlog = (props) => {
@@ -27,7 +27,15 @@ const CreateBlog = (props) => {
 		setLoadingSpinner(true);
 		if (!!title && !!blogBody && !!imageUploaded) {
 			try {
-				const resp = await uploadFile(imageUploaded, CONFIG);
+				// setting default not aws uploading function
+				const resp = {
+					location:
+						'https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1023678802%2F960x0.jpg%3Ffit%3Dscale',
+				};
+				setTimeout(() => {}, 1500);
+				// comment above and uncomment below to include AWS upload
+
+				// const resp = await uploadFile(imageUploaded, CONFIG);
 				props.addBlogListHandler({
 					title,
 					blogBody,

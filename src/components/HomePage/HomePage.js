@@ -3,7 +3,7 @@ import BlogComponent from '../BlogComponent/BlogComponent';
 
 const HomePage = (props) => {
 	return (
-		<div>
+		<div className="homepage__container">
 			<h2>Home Pages</h2>
 			{props.blogList.length > 0 && (
 				<BlogComponent blogList={props.blogList} />
