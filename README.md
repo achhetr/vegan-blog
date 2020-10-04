@@ -23,7 +23,7 @@ yarn start
 ```
 
 Go to link
-[vegan-blog] (https://vegan-blog.netlify.app/)
+[vegan-blog](https://vegan-blog.netlify.app/)
 
 ## Contributing
 
