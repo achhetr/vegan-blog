@@ -1,40 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => (
-	<div className="full-app-width">
-		<header className="app-container-width nav-header">
-			<div className="nav-header--logo">
-				<Link to="/" className="logo-container">
-					LOGO
-				</Link>
-			</div>
-			<div className="nav-header--navigation">
-				<ol className="nav-header__list">
-					<li className="nav-header__list--item">
-						<Link to="/" className="link-color">
-							Home
-						</Link>
+	<>
+		<header className="header">
+			<nav className="nav-header">
+				<div>
+					<p>LOGO</p>
+				</div>
+				<ol>
+					<li>
+						<NavLink to="/">Home</NavLink>
 					</li>
-					<li className="nav-header__list--item">
-						<Link to="/" className="link-color">
-							About
-						</Link>
+					<li>
+						<NavLink to="/">About</NavLink>
 					</li>
-					<li className="nav-header__list--item">
-						<Link to="/" className="link-color">
-							Contact Us
-						</Link>
+					<li>
+						<NavLink to="/">Blog</NavLink>
+					</li>
+					<li>
+						<NavLink to="/">Contact</NavLink>
 					</li>
 				</ol>
-				<div className="nav-header__list--item">
-					<Link to="/create" className="link-color create-blog">
-						New
-					</Link>
+				<div>
+					<p>LOGIN</p>
 				</div>
-			</div>
+			</nav>
 		</header>
-	</div>
+	</>
 );
 
 export default Header;

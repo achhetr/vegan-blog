@@ -1,8 +1,8 @@
 @import './base-color';
-@import './base-size';
-@import './base-settings';
-@import '../components/MainApp/mainApp';
-@import '../components/Header/header';
-@import '../components/HomePage/homepage';
-@import '../components//BlogComponent/blog-component';
-@import '../components/BlogLayout/blog-layout';
+@import './base-layout';
+
+@import './components/layout';
+@import './components/header';
+@import './components/header-carousel';
+@import './components/homepage';
+@import './components/footer';

@@ -1,0 +1,13 @@
+@mixin normalize {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	@include normalize();
+}
+
+body {
+	@include normalize();
+}
