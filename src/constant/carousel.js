@@ -4,6 +4,6 @@ import imageThree from '../images/vegan-3.jpg';
 
 export default [
 	{ description: 'I am first vegan', images: imageOne },
-	{ description: 'I am second vegan' },
-	{ description: 'I am third vegan' },
+	{ description: 'I am second vegan', images: imageTwo },
+	{ description: 'I am third vegan', images: imageThree },
 ];
