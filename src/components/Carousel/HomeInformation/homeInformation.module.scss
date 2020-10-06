@@ -16,16 +16,29 @@
 
 .Button {
 	width: 10rem;
-	border: 1px solid white;
 	border-radius: 0.4rem;
 	padding: 1rem 2rem;
 	margin: 1rem;
+	font-size: 1rem;
+	font-weight: 700;
 }
 
 .LeftButton {
 	background-color: yellow;
+	border: 1px solid green;
+	color: black;
+	&:hover {
+		cursor: pointer;
+		background-color: darken($color: yellow, $amount: 10%);
+	}
 }
 
 .RightButton {
 	background-color: green;
+	border: 1px solid yellow;
+	color: white;
+	&:hover {
+		cursor: pointer;
+		background-color: lighten($color: green, $amount: 20%);
+	}
 }
