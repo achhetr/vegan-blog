@@ -1,23 +1,26 @@
 import React from 'react';
 
+import HomeInformation from '../HomeInformation/HomeInformation';
+
 import carouselStyle from '../carousel.module.scss';
 import homeStyle from './home.module.scss';
 
 const CarouselHome = () => {
+	const homeHeader = {
+		header: 'Eat Healthy Vegan Foods',
+		buttonLeft: 'Learn More',
+		buttonRight: 'Go Vegan',
+	};
 	return (
-		<div>
+		<>
 			<div className={`${carouselStyle.Background} ${homeStyle.Home}`} />
-			<div className="carousel-component">
-				<div className="carousel-component__container">
-					<button className="carousel-component__container--home-button">
-						This is home
-					</button>
-					<button className="carousel-component__container--button">
-						This is login
-					</button>
-				</div>
-			</div>
-		</div>
+			<HomeInformation
+				header={homeHeader.header}
+				buttonLeft={homeHeader.buttonLeft}
+				buttonRight={homeHeader.buttonRight}
+				className={carouselStyle.InformationContainer}
+			/>
+		</>
 	);
 };
 

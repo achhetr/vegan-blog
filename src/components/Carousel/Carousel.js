@@ -6,6 +6,7 @@ import CarouselProduct from './CarouselProduct/CarouselProduct';
 
 const Carousel = (props) => {
 	const SelectedComponent = ({ number }) => {
+		console.log(number, 'checking');
 		if (number === 0) {
 			return <CarouselHome />;
 		} else if (number === 1) {
@@ -15,11 +16,9 @@ const Carousel = (props) => {
 		}
 	};
 	return (
-		<div className="carousel__component">
-			<>
-				<SelectedComponent number={props.number} />
-			</>
-		</div>
+		<>
+			<SelectedComponent number={props.number} />
+		</>
 	);
 };
 

@@ -1,0 +1,26 @@
+.Container {
+	color: white;
+	background-color: red;
+	margin: 0 auto;
+	width: 40vw;
+}
+
+.ButtonContainer {
+	display: flex;
+}
+
+.Button {
+	width: 10rem;
+	border: 1px solid white;
+	border-radius: 0.4rem;
+	padding: 1rem 2rem;
+	margin: 1rem;
+}
+
+.LeftButton {
+	background-color: yellow;
+}
+
+.RightButton {
+	background-color: green;
+}
