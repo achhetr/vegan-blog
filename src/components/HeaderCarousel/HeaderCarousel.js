@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import headerCarouselStyle from './headerCarousel.module.scss';
 
 const HeaderCarousel = (props) => {
@@ -8,13 +8,13 @@ const HeaderCarousel = (props) => {
 		<div className={headerCarouselStyle.Container}>
 			<div onClick={props.onCarouselSelect.bind(this, 'up')}>
 				<FontAwesomeIcon
-					icon={faAngleUp}
+					icon={faAngleLeft}
 					className={headerCarouselStyle.FAIcon}
 				/>
 			</div>
 			<div onClick={props.onCarouselSelect.bind(this, 'down')}>
 				<FontAwesomeIcon
-					icon={faAngleDown}
+					icon={faAngleRight}
 					className={headerCarouselStyle.FAIcon}
 				/>
 			</div>

@@ -8,7 +8,35 @@
 .NavHeader {
 	width: 80%;
 	margin: 0 auto;
+	padding-top: 1rem;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: center;
+}
+
+.CreateBlog {
+	margin-left: auto;
+	border: 2px solid black;
+	padding: 0.5rem 1rem;
+	border-radius: 0.4rem;
+	background-color: green;
+}
+
+.NavList {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.NavList {
+	li {
+		padding: 0 1rem;
+	}
+}
+
+.NavLink {
+	color: rgb(255, 255, 255);
+	font-size: 1.5rem;
+	text-decoration: none;
 }

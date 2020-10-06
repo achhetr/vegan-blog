@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import HeaderCarousel from '../HeaderCarousel/HeaderCarousel';
 import Carousel from '../Carousel/Carousel';
@@ -16,9 +16,12 @@ const HomePage = () => {
 		}
 	};
 
-	// setInterval(() => {
-	// 	setCarousel((prevState) => (prevState <= 0 ? 2 : prevState - 1));
-	// }, 5000);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCarousel((prevState) => (prevState <= 0 ? 2 : prevState - 1));
+		}, 3500);
+		return () => clearInterval(interval);
+	}, []);
 
 	return (
 		<div className={homeStyle.Home}>

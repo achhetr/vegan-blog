@@ -6,7 +6,7 @@ import productStyle from './product.module.scss';
 
 const CarouselProduct = () => {
 	const productHeader = {
-		header: 'Vegan Blog with connect you with Vegans',
+		header: 'Connect with Vegans',
 		buttonLeft: 'Learn More',
 		buttonRight: 'Go Vegan',
 	};

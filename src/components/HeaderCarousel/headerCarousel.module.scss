@@ -1,13 +1,14 @@
 .Container {
 	display: flex;
-	flex-direction: column;
 	position: fixed;
 	top: 50%;
-	right: 4rem;
+	width: 80%;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .FAIcon {
 	padding: 0.2rem;
-	font-size: 2rem;
-	opacity: 0.4;
+	font-size: 4rem;
+	opacity: 0.5;
 }

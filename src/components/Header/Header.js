@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import Logo from './Logo/Logo';
 import headerStyle from './header.module.scss';
 
 const Header = () => (
@@ -8,24 +9,36 @@ const Header = () => (
 		<header className={headerStyle.Header}>
 			<nav className={headerStyle.NavHeader}>
 				<div>
-					<p>LOGO</p>
+					<NavLink to="/" className={headerStyle.NavLink}>
+						<Logo />
+					</NavLink>
 				</div>
-				<ol>
+				<ol className={headerStyle.NavList}>
 					<li>
-						<NavLink to="/">Home</NavLink>
+						<NavLink to="/" className={headerStyle.NavLink}>
+							Home
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/">About</NavLink>
+						<NavLink to="/" className={headerStyle.NavLink}>
+							About
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/">Blog</NavLink>
+						<NavLink to="/" className={headerStyle.NavLink}>
+							Blog
+						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/">Contact</NavLink>
+						<NavLink to="/" className={headerStyle.NavLink}>
+							Contact
+						</NavLink>
 					</li>
 				</ol>
-				<div>
-					<p>LOGIN</p>
+				<div className={headerStyle.CreateBlog}>
+					<NavLink to="/" className={headerStyle.NavLink}>
+						Create Blog
+					</NavLink>
 				</div>
 			</nav>
 		</header>
