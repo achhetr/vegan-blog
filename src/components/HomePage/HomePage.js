@@ -19,7 +19,7 @@ const HomePage = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setCarousel((prevState) => (prevState <= 0 ? 2 : prevState - 1));
-		}, 3500);
+		}, 5000);
 		return () => clearInterval(interval);
 	}, []);
 

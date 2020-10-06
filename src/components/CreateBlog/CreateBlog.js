@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Spinner from 'react-spinner-material';
 // import { uploadFile } from 'react-s3';
 import { Redirect } from 'react-router-dom';
@@ -6,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
 // import CONFIG from '../../config/config';
 import ImageGetter from '../ImageGetter/ImageGetter';
+import { createBlog } from '../../redux-store/actions/blog';
 
 const CreateBlog = (props) => {
 	const [title, setTitle] = useState('');
@@ -13,6 +15,8 @@ const CreateBlog = (props) => {
 	const [redirect, setRedirect] = useState(false);
 	const [imageUploaded, setImageUploaded] = useState(null);
 	const [loadingSpinner, setLoadingSpinner] = useState(false);
+
+	const dispatch = useDispatch();
 
 	const resetHandler = () => {
 		setTitle('');
@@ -24,7 +28,7 @@ const CreateBlog = (props) => {
 
 	const handleCreatePost = async (e) => {
 		e.preventDefault();
-		setLoadingSpinner(true);
+		// setLoadingSpinner(true);
 		if (!!title && !!blogBody && !!imageUploaded) {
 			try {
 				// setting default not aws uploading function
@@ -36,11 +40,20 @@ const CreateBlog = (props) => {
 				// comment above and uncomment below to include AWS upload
 
 				// const resp = await uploadFile(imageUploaded, CONFIG);
-				props.addBlogListHandler({
-					title,
-					blogBody,
-					imageUploaded: resp.location,
-				});
+				const result = dispatch(
+					createBlog({
+						title,
+						blogBody,
+						imageUrl: resp.location,
+						tags: '',
+					})
+				);
+				console.log('Order dispatch', result);
+				// props.addBlogListHandler({
+				// 	title,
+				// 	blogBody,
+				// 	imageUploaded: resp.location,
+				// });
 				resetHandler();
 			} catch (error) {
 				console.log(error);

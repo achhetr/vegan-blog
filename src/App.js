@@ -1,8 +1,7 @@
 import React from 'react';
-
-import MainApp from './components/MainApp/MainApp';
+import AppRouter from './AppRouter/AppRouter';
 import './styles/styles.scss';
 
-const App = () => <MainApp />;
+const App = () => <AppRouter />;
 
 export default App;

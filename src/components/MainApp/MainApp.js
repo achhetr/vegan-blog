@@ -59,14 +59,18 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
 import HomePage from '../HomePage/HomePage';
+import CreateBlog from '../CreateBlog/CreateBlog';
 
 const MainApp = () => {
 	return (
 		<BrowserRouter>
 			<Layout>
 				<Switch>
-					<Route path="/">
+					<Route exact path="/">
 						<HomePage />
+					</Route>
+					<Route path="/create">
+						<CreateBlog />
 					</Route>
 				</Switch>
 			</Layout>
