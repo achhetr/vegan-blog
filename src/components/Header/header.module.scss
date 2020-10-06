@@ -14,22 +14,11 @@
 	justify-content: center;
 }
 
-.CreateBlog {
-	margin-left: auto;
-	border: 2px solid black;
-	padding: 0.5rem 1rem;
-	border-radius: 0.4rem;
-	background-color: green;
-}
-
 .NavList {
 	list-style: none;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-}
-
-.NavList {
 	li {
 		padding: 0 1rem;
 	}
@@ -39,4 +28,29 @@
 	color: rgb(255, 255, 255);
 	font-size: 1.5rem;
 	text-decoration: none;
+	padding-bottom: 0.4rem;
+	&:hover {
+		border-bottom: 1.5px solid white;
+	}
+}
+
+.CreateBlog {
+	margin-left: auto;
+	border: 2px solid black;
+
+	padding: 0.5rem 1rem;
+	border-radius: 0.4rem;
+	background-color: green;
+
+	& a {
+		@extend .NavLink;
+		font-weight: 700;
+		&:hover {
+			border: none;
+		}
+	}
+
+	&:hover {
+		background-color: lighten($color: green, $amount: 10%);
+	}
 }

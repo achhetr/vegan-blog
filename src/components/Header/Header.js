@@ -20,25 +20,23 @@ const Header = () => (
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/" className={headerStyle.NavLink}>
+						<NavLink to="/about" className={headerStyle.NavLink}>
 							About
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/" className={headerStyle.NavLink}>
+						<NavLink to="/blog" className={headerStyle.NavLink}>
 							Blog
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/" className={headerStyle.NavLink}>
+						<NavLink to="/contact" className={headerStyle.NavLink}>
 							Contact
 						</NavLink>
 					</li>
 				</ol>
 				<div className={headerStyle.CreateBlog}>
-					<NavLink to="/" className={headerStyle.NavLink}>
-						Create Blog
-					</NavLink>
+					<NavLink to="/create">Create Blog</NavLink>
 				</div>
 			</nav>
 		</header>
