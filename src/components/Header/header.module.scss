@@ -36,7 +36,7 @@
 
 .CreateBlog {
 	margin-left: auto;
-	border: 2px solid black;
+	border: 2px solid lighten($color: green, $amount: 5%);
 
 	padding: 0.5rem 1rem;
 	border-radius: 0.4rem;
