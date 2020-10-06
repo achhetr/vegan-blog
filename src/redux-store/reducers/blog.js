@@ -6,8 +6,7 @@ import Blog from '../model/Blog';
 const defaultBlogStore = [];
 
 const blogReducers = (state = defaultBlogStore, action) => {
-	console.log(action);
-	switch (action.types) {
+	switch (action.type) {
 		case actionTypes.CREATE_NEW_BLOG:
 			console.log('CREATE_NEW_BLOG');
 			const id = uuidv4();
