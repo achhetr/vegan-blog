@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import HeaderCarousel from '../HeaderCarousel/HeaderCarousel';
 import Carousel from '../Carousel/Carousel';
 
+import homeStyle from './home.module.scss';
+
 const HomePage = () => {
 	const [carousel, setCarousel] = useState(0);
 
@@ -19,9 +21,8 @@ const HomePage = () => {
 	// }, 5000);
 
 	return (
-		<div className="homepage">
+		<div className={homeStyle.Home}>
 			<HeaderCarousel onCarouselSelect={onCarouselSelect} />
-			<h2>This is a home page</h2>
 			<Carousel number={carousel} />
 		</div>
 	);

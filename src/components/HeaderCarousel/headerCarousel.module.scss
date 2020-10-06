@@ -1,4 +1,4 @@
-.carousel__container {
+.Container {
 	display: flex;
 	flex-direction: column;
 	position: fixed;
@@ -6,7 +6,7 @@
 	right: 4rem;
 }
 
-.carousel__container--icon {
+.FAIcon {
 	padding: 0.2rem;
 	font-size: 2rem;
 	opacity: 0.4;

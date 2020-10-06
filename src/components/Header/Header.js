@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import headerStyle from './header.module.scss';
+
 const Header = () => (
 	<>
-		<header className="header">
-			<nav className="nav-header">
+		<header className={headerStyle.Header}>
+			<nav className={headerStyle.NavHeader}>
 				<div>
 					<p>LOGO</p>
 				</div>
