@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
 import HomePage from '../HomePage/HomePage';
-import CreateBlog from '../CreateBlog/CreateBlog';
+import CreateBlog from '../Blog/CreateBlog/CreateBlog';
 import Blog from '../Blog/Blog';
 
 const MainApp = () => {
