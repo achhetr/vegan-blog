@@ -2,10 +2,11 @@
 // import { useDispatch } from 'react-redux';
 // import Spinner from 'react-spinner-material';
 // // import { uploadFile } from 'react-s3';
+// // import CONFIG from '../../config/config';
 // import { Redirect } from 'react-router-dom';
 
 // import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
-// // import CONFIG from '../../config/config';
+
 // import ImageGetter from '../ImageGetter/ImageGetter';
 // import { createBlog } from '../../redux-store/actions/blog';
 
@@ -39,7 +40,7 @@
 // 				setTimeout(() => {}, 1500);
 // 				// comment above and uncomment below to include AWS upload
 
-// 				// const resp = await uploadFile(imageUploaded, CONFIG);
+// 				/
 // 				const result = dispatch(
 // 					createBlog({
 // 						title,
@@ -107,20 +108,23 @@
 // 	);
 // };
 
-// export default CreateBlog;
-
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
+import Spinner from 'react-spinner-material';
+// import { uploadFile } from 'react-s3';
+// import CONFIG from '../../config/config';
 
 import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
+import ImageGetter from './ImageGetter/ImageGetter';
 
 const CreateBlog = (props) => {
 	const [title, setTitle] = useState('');
 	const [blogBody, setBlogBody] = useState('');
 	const [imageUrl, setImageUrl] = useState('');
 	const [tags, setTags] = useState('');
+	const [loadingSpinner, setLoadingSpinner] = useState(false);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -133,40 +137,71 @@ const CreateBlog = (props) => {
 		console.log(text, 'desi bro');
 		setBlogBody(() => text);
 	};
-	const onSetImageUrl = (e) => {
-		const result = e.target.value;
-		setImageUrl(() => result);
+	const onSetImageUrl = (imageUrl) => {
+		setImageUrl(() => imageUrl);
 	};
 	const onSetTags = (e) => {
 		const result = e.target.value;
 		setTags(() => result);
 	};
 
+	const onImageUploadHandler = (file) => {
+		try {
+			const resp = {
+				location:
+					'https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1023678802%2F960x0.jpg%3Ffit%3Dscale',
+			};
+			// comment above and uncomment below to include AWS upload
+			// const resp = await uploadFile(imageUploaded, CONFIG);
+			onSetImageUrl(resp.location);
+		} catch (error) {
+			console.log('ERROR AAYA', error);
+		}
+	};
+
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
+		setLoadingSpinner(() => true);
 		const blogData = { title, blogBody, imageUrl, tags };
 		dispatch(createBlog({ blogData }));
-		history.push('/');
+
+		// this aync call is only used to replicate image uploading time in AWS
+		setTimeout(() => {
+			setLoadingSpinner(() => false);
+			history.push('/');
+		}, 1500);
 	};
 
 	return (
-		<div>
-			<form onSubmit={onSubmitHandler}>
-				<input
-					placeholder="Title"
-					value={title}
-					onChange={onSetTitle}
+		<>
+			{loadingSpinner ? (
+				<Spinner
+					radius={60}
+					color={'#d64747'}
+					stroke={2}
+					visible={true}
 				/>
-				<BlogRichEditor enterBlogBody={onSetBlogBody} />
-				<input
-					placeholder="Image URL"
-					value={imageUrl}
-					onChange={onSetImageUrl}
-				/>
-				<input placeholder="Tags" value={tags} onChange={onSetTags} />
-				<input type="submit" value="Submit" />
-			</form>
-		</div>
+			) : (
+				<div>
+					<form onSubmit={onSubmitHandler}>
+						<input
+							placeholder="Title"
+							value={title}
+							onChange={onSetTitle}
+						/>
+						<input
+							placeholder="Tags"
+							value={tags}
+							onChange={onSetTags}
+						/>
+						<BlogRichEditor enterBlogBody={onSetBlogBody} />
+						<ImageGetter uploadHandler={onImageUploadHandler} />
+
+						<input type="submit" value="Submit" />
+					</form>
+				</div>
+			)}
+		</>
 	);
 };
 

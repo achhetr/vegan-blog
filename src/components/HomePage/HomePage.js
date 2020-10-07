@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import HeaderCarousel from '../HeaderCarousel/HeaderCarousel';
-import Carousel from '../Carousel/Carousel';
+import HeaderCarousel from './HeaderCarousel/HeaderCarousel';
+import Carousel from './Carousel/Carousel';
 
 import homeStyle from './home.module.scss';
 
@@ -16,12 +16,12 @@ const HomePage = () => {
 		}
 	};
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setCarousel((prevState) => (prevState <= 0 ? 2 : prevState - 1));
-		}, 5000);
-		return () => clearInterval(interval);
-	}, []);
+	// useEffect(() => {
+	// 	const interval = setInterval(() => {
+	// 		setCarousel((prevState) => (prevState <= 0 ? 2 : prevState - 1));
+	// 	}, 10000);
+	// 	return () => clearInterval(interval);
+	// }, []);
 
 	return (
 		<div className={homeStyle.Home}>

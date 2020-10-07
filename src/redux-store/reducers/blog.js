@@ -17,7 +17,7 @@ const blogReducers = (state = defaultBlogStore, action) => {
 				action.blogData.imageUrl,
 				action.blogData.tags
 			);
-
+			console.log(state);
 			return state.concat(newBlog);
 
 		default:
