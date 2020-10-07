@@ -112,6 +112,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../../redux-store/actions/blog';
+import { useHistory } from 'react-router-dom';
+
+import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
 
 const CreateBlog = (props) => {
 	const [title, setTitle] = useState('');
@@ -120,14 +123,15 @@ const CreateBlog = (props) => {
 	const [tags, setTags] = useState('');
 
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const onSetTitle = (e) => {
 		const result = e.target.value;
 		setTitle(() => result);
 	};
-	const onSetBlogBody = (e) => {
-		const result = e.target.value;
-		setBlogBody(() => result);
+	const onSetBlogBody = (text) => {
+		console.log(text, 'desi bro');
+		setBlogBody(() => text);
 	};
 	const onSetImageUrl = (e) => {
 		const result = e.target.value;
@@ -142,8 +146,7 @@ const CreateBlog = (props) => {
 		e.preventDefault();
 		const blogData = { title, blogBody, imageUrl, tags };
 		dispatch(createBlog({ blogData }));
-		console.log(title, blogBody, imageUrl, tags);
-		console.log(props.history);
+		history.push('/');
 	};
 
 	return (
@@ -154,11 +157,7 @@ const CreateBlog = (props) => {
 					value={title}
 					onChange={onSetTitle}
 				/>
-				<input
-					placeholder="Description"
-					value={blogBody}
-					onChange={onSetBlogBody}
-				/>
+				<BlogRichEditor enterBlogBody={onSetBlogBody} />
 				<input
 					placeholder="Image URL"
 					value={imageUrl}
