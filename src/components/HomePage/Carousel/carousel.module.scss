@@ -1,0 +1,16 @@
+.Background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -1;
+	background-size: cover;
+	background-repeat: no-repeat;
+	opacity: 0.7;
+	transition: opacity 300ms ease-in-out;
+}
+
+.ButtonContainer {
+	display: flex;
+}

@@ -1,0 +1,56 @@
+.Header {
+	color: white;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+}
+
+.NavHeader {
+	width: 80%;
+	margin: 0 auto;
+	padding-top: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.NavList {
+	list-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	li {
+		padding: 0 1rem;
+	}
+}
+
+.NavLink {
+	color: rgb(255, 255, 255);
+	font-size: 1.5rem;
+	text-decoration: none;
+	padding-bottom: 0.4rem;
+	&:hover {
+		border-bottom: 1.5px solid white;
+	}
+}
+
+.CreateBlog {
+	margin-left: auto;
+	border: 2px solid lighten($color: green, $amount: 5%);
+
+	padding: 0.5rem 1rem;
+	border-radius: 0.4rem;
+	background-color: green;
+
+	& a {
+		@extend .NavLink;
+		font-weight: 700;
+		&:hover {
+			border: none;
+		}
+	}
+
+	&:hover {
+		background-color: lighten($color: green, $amount: 10%);
+	}
+}

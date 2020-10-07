@@ -1,0 +1,19 @@
+.Container {
+	display: flex;
+	position: fixed;
+	top: 50%;
+	width: 80%;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.FAIcon {
+	padding: 0.2rem;
+	font-size: 4rem;
+	opacity: 0.5;
+
+	&:hover {
+		cursor: pointer;
+		opacity: 0.2;
+	}
+}
