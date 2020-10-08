@@ -12,43 +12,59 @@ import ImageGetter from './ImageGetter/ImageGetter';
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {
 	switch (action.type) {
-		case 'BLOG_CONTENT_ADDED':
-			const blog = action.payload;
-			console.log(blog);
+		case 'ADD_TITLE':
 			return {
 				...state,
-				...blog,
+				title: action.payload,
 			};
+
+		case 'ADD_BLOG_BODY':
+			return {
+				...state,
+				blogBody: action.payload,
+			};
+
+		case 'ADD_IMAGE_URL':
+			return {
+				...state,
+				imageUrl: action.payload,
+			};
+		case 'ADD_TAGS':
+			return {
+				...state,
+				tags: action.payload,
+			};
+
 		default:
 			return state;
 	}
 };
 
 const CreateBlog = (props) => {
-	const [title, setTitle] = useState('');
-	const [blogBody, setBlogBody] = useState('');
-	const [imageUrl, setImageUrl] = useState('');
-	const [tags, setTags] = useState('');
 	const [loadingSpinner, setLoadingSpinner] = useState(false);
-
+	const [previewDisabled, setPreviewDisabled] = useState(true);
 	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const onSetTitle = (e) => {
+	const onSetTitleHandler = (e) => {
 		const result = e.target.value;
-		setTitle(() => result);
+		dispatchBlog({ type: 'ADD_TITLE', payload: result });
+		onPreviewDisabledHandler();
 	};
 	const onSetBlogBody = (text) => {
-		setBlogBody(() => text);
+		dispatchBlog({ type: 'ADD_BLOG_BODY', payload: text });
+		onPreviewDisabledHandler();
 	};
 	const onSetImageUrl = (imageUrl) => {
-		setImageUrl(() => imageUrl);
+		dispatchBlog({ type: 'ADD_IMAGE_URL', payload: imageUrl });
+		onPreviewDisabledHandler();
 	};
 	const onSetTags = (e) => {
 		const result = e.target.value;
-		setTags(() => result);
+		dispatchBlog({ type: 'ADD_TAGS', payload: result });
+		onPreviewDisabledHandler();
 	};
 
 	const onImageUploadHandler = (file) => {
@@ -65,24 +81,27 @@ const CreateBlog = (props) => {
 		}
 	};
 
-	const onSaveHandler = (e) => {
+	const onPreviewDisabledHandler = () => {
+		if (
+			blogData.title &&
+			blogData.blogBody &&
+			blogData.imageUrl &&
+			blogData.tags
+		) {
+			setPreviewDisabled(() => false);
+		}
+	};
+
+	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
-		const blogDataEntered = { title, blogBody, imageUrl, tags };
-		dispatchBlog({
-			type: 'BLOG_CONTENT_ADDED',
-			payload: { ...blogDataEntered },
-		});
+		dispatch(createBlog({ ...blogData }));
+
 		// this aync call is only used to replicate image uploading time in AWS
 		setTimeout(() => {
 			setLoadingSpinner(() => false);
+			history.push('/');
 		}, 1500);
-	};
-
-	const onSubmitHandler = () => {
-		console.log(blogData);
-		dispatch(createBlog({ ...blogData }));
-		history.push('/');
 	};
 
 	return (
@@ -96,26 +115,28 @@ const CreateBlog = (props) => {
 				/>
 			) : (
 				<div>
-					<form onSubmit={onSaveHandler}>
+					<form onSubmit={onSubmitHandler}>
 						<input
 							placeholder="Title"
-							value={title}
-							onChange={onSetTitle}
+							value={blogData.title}
+							onChange={onSetTitleHandler}
 						/>
 						<input
 							placeholder="Tags"
-							value={tags}
+							value={blogData.tags}
 							onChange={onSetTags}
 						/>
-						<BlogRichEditor enterBlogBody={onSetBlogBody} />
 						<ImageGetter uploadHandler={onImageUploadHandler} />
-
-						<input type="submit" value="Save" />
+						<BlogRichEditor enterBlogBody={onSetBlogBody} />
+						<input type="submit" value="Submit" />
 					</form>
-					<button type="button" onClick={onSubmitHandler}>
-						Submit
-					</button>
-					<button type="button" onClick={() => {}}>
+					<button
+						type="button"
+						onClick={() => {
+							console.log('Preview pressed');
+						}}
+						disabled={previewDisabled}
+					>
 						Preview
 					</button>
 				</div>
