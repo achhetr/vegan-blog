@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
 import Spinner from 'react-spinner-material';
+import Modal from 'react-modal';
 // import { uploadFile } from 'react-s3';
 // import CONFIG from '../../config/config';
 
 import BlogRichEditor from '../BlogRichEditor/BlogRichEditor';
 import ImageGetter from './ImageGetter/ImageGetter';
+import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {
@@ -43,6 +45,7 @@ const stateReducer = (state, action) => {
 const CreateBlog = (props) => {
 	const [loadingSpinner, setLoadingSpinner] = useState(false);
 	const [previewDisabled, setPreviewDisabled] = useState(true);
+	const [isOpenModal, setIsOpenModal] = useState(false);
 	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
 
 	const dispatch = useDispatch();
@@ -92,6 +95,14 @@ const CreateBlog = (props) => {
 		}
 	};
 
+	const onModalOpenHandler = () => {
+		setIsOpenModal(() => true);
+	};
+
+	const onModalCloseHandler = () => {
+		setIsOpenModal(() => false);
+	};
+
 	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
@@ -115,6 +126,16 @@ const CreateBlog = (props) => {
 				/>
 			) : (
 				<div>
+					<div>
+						<Modal
+							isOpen={isOpenModal}
+							contentLabel="Preview Blog"
+							onRequestClose={onModalCloseHandler}
+							ariaHideApp={false}
+						>
+							<BlogLayout blog={blogData} />
+						</Modal>
+					</div>
 					<form onSubmit={onSubmitHandler}>
 						<input
 							placeholder="Title"
@@ -132,9 +153,7 @@ const CreateBlog = (props) => {
 					</form>
 					<button
 						type="button"
-						onClick={() => {
-							console.log('Preview pressed');
-						}}
+						onClick={onModalOpenHandler}
 						disabled={previewDisabled}
 					>
 						Preview

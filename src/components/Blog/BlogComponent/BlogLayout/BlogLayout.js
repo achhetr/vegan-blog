@@ -1,11 +1,11 @@
 import React from 'react';
 
 const BlogLayout = (props) => {
-	console.log(props.blog.imageUrl);
 	return (
 		<div>
 			<h3>{props.blog.title}</h3>
 			<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
+			<p>{props.blog.tags}</p>
 			<div>
 				<img
 					style={{ width: '20rem', height: '20rem' }}
