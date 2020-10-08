@@ -8,20 +8,19 @@ const defaultBlogStore = [];
 const blogReducers = (state = defaultBlogStore, action) => {
 	switch (action.type) {
 		case actionTypes.CREATE_NEW_BLOG:
-			console.log('CREATE_NEW_BLOG');
+			console.log(action.payload, 'from khopcha');
 			const id = uuidv4();
 			const newBlog = new Blog(
 				id,
-				action.blogData.title,
-				action.blogData.blogBody,
-				action.blogData.imageUrl,
-				action.blogData.tags
+				action.payload.title,
+				action.payload.blogBody,
+				action.payload.imageUrl,
+				action.payload.tags
 			);
 			console.log(state);
 			return state.concat(newBlog);
 
 		default:
-			console.log('DEFAULT');
 			return state;
 	}
 };
