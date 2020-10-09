@@ -4,8 +4,9 @@ const BlogLayout = (props) => {
 	return (
 		<div>
 			<h3>{props.blog.title}</h3>
-			<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
 			<p>{props.blog.tags}</p>
+			<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
+
 			<div>
 				<img
 					style={{ width: '20rem', height: '20rem' }}
