@@ -74,9 +74,9 @@ const CreateBlog = (props) => {
 		const result = e.target.value;
 		dispatchBlog({ type: 'ADD_TAGS', payload: result });
 	};
-	const onAddImageContainer = () => {
-		dispatchBlog({ type: 'ADD_IMAGE_CONTAINER', payload: '' });
-	};
+	// const onAddImageContainer = () => {
+	// 	dispatchBlog({ type: 'ADD_IMAGE_CONTAINER', payload: '' });
+	// };
 
 	const onImageUploadHandler = (file) => {
 		try {
