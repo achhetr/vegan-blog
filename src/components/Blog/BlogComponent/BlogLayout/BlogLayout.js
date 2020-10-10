@@ -5,14 +5,8 @@ const BlogLayout = (props) => {
 		<div>
 			<h3>{props.blog.title}</h3>
 			<p>{props.blog.tags}</p>
-			<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
-
-			<div>
-				<img
-					style={{ width: '20rem', height: '20rem' }}
-					src={props.blog.imageUrl}
-					alt={props.blog.imageUrl}
-				/>
+			<div style={{ width: '20rem', height: '20rem' }}>
+				<p dangerouslySetInnerHTML={{ __html: props.blog.blogBody }} />
 			</div>
 		</div>
 	);
