@@ -9,6 +9,7 @@
 		"@testing-library/jest-dom": "^4.2.4",
 		"@testing-library/react": "^9.3.2",
 		"@testing-library/user-event": "^7.1.2",
+		"base64-to-image": "^1.0.2",
 		"browser-image-compression": "^1.0.12",
 		"compressjs": "^1.0.3",
 		"dotenv": "^8.2.0",
