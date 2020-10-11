@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useRef } from 'react';
+import React, { useState, useReducer, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
@@ -21,9 +21,10 @@ const stateReducer = (state, action) => {
 			};
 
 		case 'ADD_BLOG_BODY':
+			let data = action.payload;
 			return {
 				...state,
-				blogBody: action.payload,
+				blogBody: data,
 			};
 
 		case 'ADD_TAGS':
@@ -39,13 +40,27 @@ const stateReducer = (state, action) => {
 
 const CreateBlog = (props) => {
 	let quillRef = useRef(null);
-	let quillReact = ReactQuill;
+	// let quillReact = ReactQuill;
 
 	const [loadingSpinner, setLoadingSpinner] = useState(false);
 	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
 
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+	// useEffect(() => {
+	// 	document.getElementById('title').focus();
+	// }, [blogData.title]);
+	// useEffect(() => {
+	// 	document.getElementById('tags').focus();
+	// }, [blogData.tags]);
+	// useEffect(() => {
+	// 	document.getElementById('editor').focus();
+	// }, [blogData.editor]);
+	useEffect(() => {
+		var selection = document.getSelection();
+		console.log(selection, 'selection ka bhosda');
+	});
 
 	const onSetTitleHandler = (e) => {
 		const result = e.target.value;
@@ -76,8 +91,6 @@ const CreateBlog = (props) => {
 	};
 
 	const onImageHandler = async () => {
-		console.log('on handler');
-
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
 		input.setAttribute('accept', 'image/*');
@@ -85,11 +98,12 @@ const CreateBlog = (props) => {
 		input.onchange = async () => {
 			const file = input.files ? input.files[0] : null;
 			if (file) {
-				const url = await onFileCompressUploadAWS(file);
-				console.log(url.location, 'url ka bhosda');
-				console.log(quillReact, 'quill ref ka bhosda');
+				// const url = await onFileCompressUploadAWS(file);
+				const url = {
+					location:
+						'https://i.guim.co.uk/img/media/86c3481516dce247943ac2978b4f48d16a3ac265/0_170_5120_3074/master/5120.jpg?width=620&quality=85&auto=format&fit=max&s=d73e0c12a90e9da24736865e9274ef17',
+				};
 				let quill = quillRef.current.getEditor();
-				console.log(quill, 'current ediot ka bhosda');
 				const range = quill.getSelection(true);
 				quill.insertEmbed(range.index, 'image', url.location);
 			}
@@ -169,22 +183,24 @@ const CreateBlog = (props) => {
 							placeholder="Title"
 							value={blogData.title}
 							onChange={onSetTitleHandler}
+							id="title"
 						/>
 						<input
 							placeholder="Tags"
 							value={blogData.tags}
 							onChange={onSetTags}
+							id="tags"
 						/>
-						<div className="text-editor">
-							<ReactQuill
-								ref={quillRef}
-								value={blogData.blogBody}
-								onChange={onSetBlogBody}
-								theme="snow"
-								modules={modules}
-								formats={formats}
-							/>
-						</div>
+						{/* <div className="text-editor"> */}
+						<ReactQuill
+							ref={quillRef}
+							value={blogData.blogBody}
+							onChange={onSetBlogBody}
+							theme="snow"
+							modules={modules}
+							formats={formats}
+						/>
+						{/* </div> */}
 						<input type="submit" value="Submit" />
 					</form>
 				</div>
