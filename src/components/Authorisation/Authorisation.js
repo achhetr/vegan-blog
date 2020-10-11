@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import LoginUser from './LoginUser/LoginUser';
 import RegisterUser from './RegisterUser/RegisterUser';
@@ -9,6 +9,12 @@ const Authorisation = () => {
 	const onChangeLoginOrRegisterHandler = () => {
 		setRegister((prevState) => !prevState);
 	};
+
+	useEffect(() => {
+		alert(
+			'This first page is a login/register feature, enter anything for username and password to enter the website :)'
+		);
+	}, []);
 	return (
 		<div>
 			{register ? (

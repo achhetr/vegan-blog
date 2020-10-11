@@ -3,12 +3,12 @@ import { useDispatch } from 'react-redux';
 import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
 import Spinner from 'react-spinner-material';
-import { uploadFile } from 'react-s3';
+// import { uploadFile } from 'react-s3';
 import imageCompression from 'browser-image-compression';
 import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
-import CONFIG from '../../../config/config';
+// import CONFIG from '../../../config/config';
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
@@ -48,12 +48,12 @@ const CreateBlog = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// useEffect(() => {
-	// 	document.getElementById('title').focus();
-	// }, [blogData.title]);
-	// useEffect(() => {
-	// 	document.getElementById('tags').focus();
-	// }, [blogData.tags]);
+	useEffect(() => {
+		document.getElementById('title').focus();
+	}, [blogData.title]);
+	useEffect(() => {
+		document.getElementById('tags').focus();
+	}, [blogData.tags]);
 	// useEffect(() => {
 	// 	document.getElementById('editor').focus();
 	// }, [blogData.editor]);
@@ -83,8 +83,9 @@ const CreateBlog = (props) => {
 		};
 		try {
 			const compressedFile = await imageCompression(file, options);
-			const resp = await uploadFile(compressedFile, CONFIG);
-			return resp;
+			// const resp = await uploadFile(compressedFile, CONFIG);
+			// return resp;
+			return !!compressedFile;
 		} catch (error) {
 			return error;
 		}
@@ -113,6 +114,7 @@ const CreateBlog = (props) => {
 	const onSubmitHandler = async (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
+		onFileCompressUploadAWS(null);
 		dispatch(createBlog({ ...blogData }));
 		console.log(blogData, 'check karo');
 		setLoadingSpinner(() => false);
