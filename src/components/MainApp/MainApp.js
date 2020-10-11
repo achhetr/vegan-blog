@@ -3,19 +3,18 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Layout from '../Layout/Layout';
-import LoginUser from '../LoginUser/LoginUser';
+import Authorisation from '../Authorisation/Authorisation';
 import HomePage from '../HomePage/HomePage';
 import CreateBlog from '../Blog/CreateBlog/CreateBlog';
 import Blog from '../Blog/Blog';
 
 const MainApp = () => {
 	const loggedIn = useSelector((state) => state.auth.loggedIn);
-	console.log(loggedIn);
 	return (
 		<BrowserRouter>
 			<Layout>
 				{!loggedIn ? (
-					<LoginUser />
+					<Authorisation />
 				) : (
 					<Switch>
 						<Route exact path="/">

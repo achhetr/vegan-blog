@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { loginUser } from '../../redux-store/actions/auth';
+import { loginUser } from '../../../redux-store/actions/auth';
 
-const LoginUser = () => {
+const LoginUser = (props) => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -23,6 +23,10 @@ const LoginUser = () => {
 		dispatch(loginUser({ username, password }));
 	};
 
+	const registerChange = () => {
+		props.onChange();
+	};
+
 	return (
 		<div>
 			<form onSubmit={onSubmitLogin}>
@@ -40,6 +44,7 @@ const LoginUser = () => {
 				/>
 				<input type="submit" value="login" />
 			</form>
+			<button onClick={registerChange}>New User Click Here</button>
 		</div>
 	);
 };
