@@ -5,13 +5,11 @@ import { useHistory } from 'react-router-dom';
 import Spinner from 'react-spinner-material';
 import { uploadFile } from 'react-s3';
 import imageCompression from 'browser-image-compression';
-import base64ToImage from 'base64-to-image';
 import ReactQuill from 'react-quill';
 
 import 'react-quill/dist/quill.snow.css';
 import CONFIG from '../../../config/config';
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
-import base from '../../../tes';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {
@@ -40,7 +38,8 @@ const stateReducer = (state, action) => {
 };
 
 const CreateBlog = (props) => {
-	let quill = useRef(null);
+	let quillRef = useRef(null);
+	let quillReact = ReactQuill;
 
 	const [loadingSpinner, setLoadingSpinner] = useState(false);
 	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
@@ -76,39 +75,32 @@ const CreateBlog = (props) => {
 		}
 	};
 
-	const onImageDataProcess = async () => {
+	const onImageHandler = async () => {
 		console.log('on handler');
-		// const input = document.createElement('input');
 
-		// input.setAttribute('type', 'file');
-		// input.setAttribute('accept', 'image/*');
-		// input.click();
-
-		// input.onchange = async () => {
-		// 	console.log('entered');
-		// 	const url = await onFileCompressUploadAWS(input.files[0]);
-		// 	const range = quill.getEditorSelection(true);
-		// 	console.log(url, 'url obejct');
-		// 	console.log(range, 'range');
-		// 	quill.insertEmbed(range.index, 'image', url);
-		// };
-		// var base64Str = base;
-		// var path = '';
-		// var optionalObj = { fileName: 'imageFileName', type: 'jpeg' };
-		// const out = base64ToImage(base64Str, path, optionalObj);
-		// console.log(out, 'poutpit');
-
-		const url = await onFileCompressUploadAWS(base);
-		console.log(url);
-		console.log(base);
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', 'image/*');
+		input.click();
+		input.onchange = async () => {
+			const file = input.files ? input.files[0] : null;
+			if (file) {
+				const url = await onFileCompressUploadAWS(file);
+				console.log(url.location, 'url ka bhosda');
+				console.log(quillReact, 'quill ref ka bhosda');
+				let quill = quillRef.current.getEditor();
+				console.log(quill, 'current ediot ka bhosda');
+				const range = quill.getSelection(true);
+				quill.insertEmbed(range.index, 'image', url.location);
+			}
+		};
 	};
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
-		await onImageDataProcess(blogData.blogBody);
-
 		dispatch(createBlog({ ...blogData }));
+		console.log(blogData, 'check karo');
 		setLoadingSpinner(() => false);
 		history.push('/');
 	};
@@ -127,9 +119,9 @@ const CreateBlog = (props) => {
 				['link', 'image', 'video'],
 				['code-block'],
 			],
-			// handlers: {
-			// 	image: () => onImageHandler(),
-			// },
+			handlers: {
+				image: () => onImageHandler(),
+			},
 		},
 
 		clipboard: {
@@ -185,7 +177,7 @@ const CreateBlog = (props) => {
 						/>
 						<div className="text-editor">
 							<ReactQuill
-								ref={(el) => (quill = el)}
+								ref={quillRef}
 								value={blogData.blogBody}
 								onChange={onSetBlogBody}
 								theme="snow"
