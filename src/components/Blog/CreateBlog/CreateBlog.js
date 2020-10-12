@@ -49,6 +49,12 @@ const CreateBlog = (props) => {
 	const history = useHistory();
 
 	useEffect(() => {
+		alert(
+			'this is to test the text editor, and it will use Bear image, to save aws update, this editor has bug and we are on it to fix it'
+		);
+	}, []);
+
+	useEffect(() => {
 		document.getElementById('title').focus();
 	}, [blogData.title]);
 	useEffect(() => {

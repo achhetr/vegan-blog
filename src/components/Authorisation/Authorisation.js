@@ -12,7 +12,7 @@ const Authorisation = () => {
 
 	useEffect(() => {
 		alert(
-			'This first page is a login/register feature, enter anything for username and password to enter the website :)'
+			'This first page is a login/register feature, enter anything for username and password to enter the website :), We are setting up AWS Cognito'
 		);
 	}, []);
 	return (
