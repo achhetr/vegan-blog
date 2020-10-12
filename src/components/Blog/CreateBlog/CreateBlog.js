@@ -1,219 +1,69 @@
-import React, { useState, useReducer, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
-import Spinner from 'react-spinner-material';
-// import { uploadFile } from 'react-s3';
-import imageCompression from 'browser-image-compression';
-import ReactQuill from 'react-quill';
 
-import 'react-quill/dist/quill.snow.css';
-// import CONFIG from '../../../config/config';
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
-
-const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
-const stateReducer = (state, action) => {
-	switch (action.type) {
-		case 'ADD_TITLE':
-			return {
-				...state,
-				title: action.payload,
-			};
-
-		case 'ADD_BLOG_BODY':
-			let data = action.payload;
-			return {
-				...state,
-				blogBody: data,
-			};
-
-		case 'ADD_TAGS':
-			return {
-				...state,
-				tags: action.payload,
-			};
-
-		default:
-			return state;
-	}
-};
+import Editor from '../../Editor/Editor';
+import Input from '../../Input/Input';
 
 const CreateBlog = (props) => {
-	let quillRef = useRef(null);
-	// let quillReact = ReactQuill;
-
-	const [loadingSpinner, setLoadingSpinner] = useState(false);
-	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
+	const [title, setTitle] = useState('');
+	const [tags, setTags] = useState('');
+	const [blogBody, setBlogBody] = useState('');
 
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	useEffect(() => {
-		alert(
-			'this is to test the text editor, and it will use Bear image, to save aws update, this editor has bug and we are on it to fix it'
-		);
-	}, []);
-
-	useEffect(() => {
-		document.getElementById('title').focus();
-	}, [blogData.title]);
-	useEffect(() => {
-		document.getElementById('tags').focus();
-	}, [blogData.tags]);
-	// useEffect(() => {
-	// 	document.getElementById('editor').focus();
-	// }, [blogData.editor]);
-	useEffect(() => {
-		var selection = document.getSelection();
-		console.log(selection, 'selection ka bhosda');
-	});
-
 	const onSetTitleHandler = (e) => {
+		e.preventDefault();
 		const result = e.target.value;
-		dispatchBlog({ type: 'ADD_TITLE', payload: result });
+		setTitle(() => result);
 	};
 	const onSetBlogBody = (text) => {
-		dispatchBlog({ type: 'ADD_BLOG_BODY', payload: text });
+		setBlogBody(() => text);
 	};
 
 	const onSetTags = (e) => {
+		e.preventDefault();
 		const result = e.target.value;
-		dispatchBlog({ type: 'ADD_TAGS', payload: result });
-	};
-
-	const onFileCompressUploadAWS = async (file) => {
-		const options = {
-			maxSizeMB: 4,
-			maxWidthOrHeight: 1920,
-			useWebWorker: true,
-		};
-		try {
-			const compressedFile = await imageCompression(file, options);
-			// const resp = await uploadFile(compressedFile, CONFIG);
-			// return resp;
-			return !!compressedFile;
-		} catch (error) {
-			return error;
-		}
-	};
-
-	const onImageHandler = async () => {
-		const input = document.createElement('input');
-		input.setAttribute('type', 'file');
-		input.setAttribute('accept', 'image/*');
-		input.click();
-		input.onchange = async () => {
-			const file = input.files ? input.files[0] : null;
-			if (file) {
-				// const url = await onFileCompressUploadAWS(file);
-				const url = {
-					location:
-						'https://i.guim.co.uk/img/media/86c3481516dce247943ac2978b4f48d16a3ac265/0_170_5120_3074/master/5120.jpg?width=620&quality=85&auto=format&fit=max&s=d73e0c12a90e9da24736865e9274ef17',
-				};
-				let quill = quillRef.current.getEditor();
-				const range = quill.getSelection(true);
-				quill.insertEmbed(range.index, 'image', url.location);
-			}
-		};
+		setTags(() => result);
 	};
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault();
-		setLoadingSpinner(() => true);
-		onFileCompressUploadAWS(null);
+		const blogData = { title, tags, blogBody };
 		dispatch(createBlog({ ...blogData }));
-		console.log(blogData, 'check karo');
-		setLoadingSpinner(() => false);
 		history.push('/');
 	};
 
-	const modules = {
-		toolbar: {
-			container: [
-				[{ header: [1, 2, false] }],
-				['bold', 'italic', 'underline', 'strike', 'blockquote'],
-				[
-					{ list: 'ordered' },
-					{ list: 'bullet' },
-					{ indent: '-1' },
-					{ indent: '+1' },
-				],
-				['link', 'image', 'video'],
-				['code-block'],
-			],
-			handlers: {
-				image: () => onImageHandler(),
-			},
-		},
-
-		clipboard: {
-			matchVisual: false,
-		},
-	};
-
-	const formats = [
-		'header',
-		'bold',
-		'italic',
-		'underline',
-		'strike',
-		'blockquote',
-		'list',
-		'bullet',
-		'indent',
-		'link',
-		'image',
-		'code-block',
-		'video',
-	];
-
 	return (
-		<>
-			{loadingSpinner ? (
-				<Spinner
-					radius={60}
-					color={'#d64747'}
-					stroke={2}
-					visible={true}
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'row',
+			}}
+		>
+			<div>
+				<BlogLayout blog={{ title, tags, blogBody }} />
+			</div>
+			<form onSubmit={onSubmitHandler} key="1">
+				<Input
+					placeholder="Title"
+					value={title}
+					onChange={onSetTitleHandler}
+					key="2"
 				/>
-			) : (
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-					}}
-				>
-					<div>
-						<BlogLayout blog={blogData} />
-					</div>
-					<form onSubmit={onSubmitHandler}>
-						<input
-							placeholder="Title"
-							value={blogData.title}
-							onChange={onSetTitleHandler}
-							id="title"
-						/>
-						<input
-							placeholder="Tags"
-							value={blogData.tags}
-							onChange={onSetTags}
-							id="tags"
-						/>
-						{/* <div className="text-editor"> */}
-						<ReactQuill
-							ref={quillRef}
-							value={blogData.blogBody}
-							onChange={onSetBlogBody}
-							theme="snow"
-							modules={modules}
-							formats={formats}
-						/>
-						{/* </div> */}
-						<input type="submit" value="Submit" />
-					</form>
-				</div>
-			)}
-		</>
+				<Input
+					placeholder="Tags"
+					value={tags}
+					onChange={onSetTags}
+					key="3"
+				/>
+				<Editor onContentChange={onSetBlogBody} key="41" />
+				<input type="submit" value="Submit" key="5" />
+			</form>
+		</div>
 	);
 };
 
