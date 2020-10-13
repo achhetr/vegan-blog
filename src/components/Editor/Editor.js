@@ -12,7 +12,6 @@ const Editor = (props) => {
 	const [content, setContent] = useState('');
 
 	const onBlogContentChange = (text) => {
-		console.log(content, content.length, 'yeah');
 		setContent(text);
 		props.onContentChange(text);
 	};
@@ -43,6 +42,7 @@ const Editor = (props) => {
 			if (file) {
 				// const url = await onFileCompressUploadAWS(file);
 				const f = onFileCompressUploadAWS(null);
+				console.log(f);
 				const url = {
 					location:
 						'https://i.guim.co.uk/img/media/86c3481516dce247943ac2978b4f48d16a3ac265/0_170_5120_3074/master/5120.jpg?width=620&quality=85&auto=format&fit=max&s=d73e0c12a90e9da24736865e9274ef17',
