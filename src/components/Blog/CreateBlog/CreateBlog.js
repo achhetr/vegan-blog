@@ -30,8 +30,7 @@ const CreateBlog = (props) => {
 		setTags(() => result);
 	};
 
-	const onSubmitHandler = async (e) => {
-		e.preventDefault();
+	const onSubmitHandler = () => {
 		const blogData = { title, tags, blogBody };
 		dispatch(createBlog({ ...blogData }));
 		history.push('/');
@@ -47,7 +46,12 @@ const CreateBlog = (props) => {
 			<div>
 				<BlogLayout blog={{ title, tags, blogBody }} />
 			</div>
-			<form onSubmit={onSubmitHandler} key="1">
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+				}}
+			>
 				<Input
 					placeholder="Title"
 					value={title}
@@ -61,8 +65,9 @@ const CreateBlog = (props) => {
 					key="3"
 				/>
 				<Editor onContentChange={onSetBlogBody} key="41" />
-				<input type="submit" value="Submit" key="5" />
-			</form>
+
+				<button onClick={onSubmitHandler}>Submit</button>
+			</div>
 		</div>
 	);
 };

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 
 // import { uploadFile } from 'react-s3';
 import imageCompression from 'browser-image-compression';
@@ -12,6 +12,7 @@ const Editor = (props) => {
 	const [content, setContent] = useState('');
 
 	const onBlogContentChange = (text) => {
+		console.log(content, content.length, 'yeah');
 		setContent(text);
 		props.onContentChange(text);
 	};
@@ -32,8 +33,7 @@ const Editor = (props) => {
 		}
 	};
 
-	const onImageHandler = async (args) => {
-		console.log(args, 'value in args');
+	const onImageHandler = () => {
 		const input = document.createElement('input');
 		input.setAttribute('type', 'file');
 		input.setAttribute('accept', 'image/*');
@@ -72,7 +72,6 @@ const Editor = (props) => {
 				image: onImageHandler,
 			},
 		},
-
 		clipboard: {
 			matchVisual: false,
 		},
@@ -93,15 +92,18 @@ const Editor = (props) => {
 		'code-block',
 		'video',
 	];
-	return (
-		<ReactQuill
-			ref={quillRef}
-			value={content}
-			onChange={onBlogContentChange}
-			theme="snow"
-			modules={modules}
-			formats={formats}
-		/>
+	return useMemo(
+		() => (
+			<ReactQuill
+				ref={quillRef}
+				value={content}
+				onChange={onBlogContentChange}
+				theme="snow"
+				modules={modules}
+				formats={formats}
+			/>
+		),
+		[]
 	);
 };
 
