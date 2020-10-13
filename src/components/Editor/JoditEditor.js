@@ -12,11 +12,26 @@ const Editor = (props) => {
 	const [content, setContent] = useState('');
 
 	const onBlogContentChange = (text) => {
+		// console.log(text, 'check');
 		setContent(text);
 		props.onContentChange(text);
 	};
+
+	const onImageHandler = (args) => {
+		console.log('SUCCESS!', args);
+		return 'https://cdn.pixabay.com/photo/2020/06/17/18/03/lights-5310589_960_720.jpg';
+	};
+
 	const config = {
+		buttons: ['bold', 'fontsize', '|', 'image', 'video'],
+		uploader: {
+			url:
+				'https://cdn.pixabay.com/photo/2020/06/17/18/03/lights-5310589_960_720.jpg',
+			insertImageAsBase64URI: true,
+			defaultHandlerSuccess: onImageHandler,
+		},
 		readonly: false,
+		toolbarAdaptive: false,
 	};
 
 	return useMemo(
