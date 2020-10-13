@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
 import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
@@ -6,6 +6,33 @@ import { useHistory } from 'react-router-dom';
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 import Editor from '../../Editor/Editor';
 import Input from '../../Input/Input';
+
+const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
+const stateReducer = (state, action) => {
+	switch (action.type) {
+		case 'ADD_TITLE':
+			return {
+				...state,
+				title: action.payload,
+			};
+
+		case 'ADD_BLOG_BODY':
+			let data = action.payload;
+			return {
+				...state,
+				blogBody: data,
+			};
+
+		case 'ADD_TAGS':
+			return {
+				...state,
+				tags: action.payload,
+			};
+
+		default:
+			return state;
+	}
+};
 
 const CreateBlog = (props) => {
 	const [title, setTitle] = useState('');
@@ -46,28 +73,17 @@ const CreateBlog = (props) => {
 			<div>
 				<BlogLayout blog={{ title, tags, blogBody }} />
 			</div>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-				}}
-			>
+			<form onSubmit={onSubmitHandler}>
 				<Input
 					placeholder="Title"
 					value={title}
 					onChange={onSetTitleHandler}
-					key="2"
 				/>
-				<Input
-					placeholder="Tags"
-					value={tags}
-					onChange={onSetTags}
-					key="3"
-				/>
-				<Editor onContentChange={onSetBlogBody} key="41" />
+				<Input placeholder="Tags" value={tags} onChange={onSetTags} />
+				<Editor onContentChange={onSetBlogBody} />
 
-				<button onClick={onSubmitHandler}>Submit</button>
-			</div>
+				<input type="submit" value="submit" />
+			</form>
 		</div>
 	);
 };
