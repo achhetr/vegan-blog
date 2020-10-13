@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Spinner from 'react-spinner-material';
 
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
-import Editor from '../../Editor/Editor';
+import JoditEditor from '../../Editor/JoditEditor';
 import Input from '../../Input/Input';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
@@ -86,7 +86,7 @@ const CreateBlog = (props) => {
 						<BlogLayout blog={blogData} />
 					</div>
 					<form onSubmit={onSubmitHandler}>
-						<h2>CREATE BLOG</h2>
+						<h2>CREATE JODIT BLOG</h2>
 						<Input
 							placeholder="Title"
 							value={blogData.title}
@@ -97,7 +97,7 @@ const CreateBlog = (props) => {
 							value={blogData.tags}
 							onChange={onSetTags}
 						/>
-						<Editor onContentChange={onSetBlogBody} />
+						<JoditEditor onContentChange={onSetBlogBody} />
 
 						<input type="submit" value="submit" />
 					</form>
