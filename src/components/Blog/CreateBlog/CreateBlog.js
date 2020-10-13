@@ -88,11 +88,15 @@ const CreateBlog = (props) => {
 					<form onSubmit={onSubmitHandler}>
 						<h2>CREATE BLOG</h2>
 						<Input
+							id="input-title"
+							name="Blog Title"
 							placeholder="Title"
 							value={blogData.title}
 							onChange={onSetTitleHandler}
 						/>
 						<Input
+							id="input-tags"
+							name="Enter Tags"
 							placeholder="Tags"
 							value={blogData.tags}
 							onChange={onSetTags}
