@@ -1,0 +1,23 @@
+.Container {
+	background-color: pink;
+	padding: 4rem 6rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.FieldContainer {
+	margin: 2rem;
+	padding: 2rem 1rem;
+}
+
+.BtnRegister {
+	padding: 0.4rem 2rem;
+	background-color: blue;
+	color: white;
+	border: 1px solid white;
+	border-radius: 0.4rem;
+	&:hover {
+		background-color: lighten($color: blue, $amount: 10%);
+	}
+}

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import LoginUser from './LoginUser/LoginUser';
 import RegisterUser from './RegisterUser/RegisterUser';
+
+import authorisationStyle from './authorisation.module.scss';
 
 const Authorisation = () => {
 	const [register, setRegister] = useState(false);
@@ -10,13 +12,8 @@ const Authorisation = () => {
 		setRegister((prevState) => !prevState);
 	};
 
-	useEffect(() => {
-		alert(
-			'This first page is a login/register feature, enter anything for username and password to enter the website :), We are setting up AWS Cognito'
-		);
-	}, []);
 	return (
-		<div>
+		<div className={authorisationStyle.Container}>
 			{register ? (
 				<RegisterUser onChange={onChangeLoginOrRegisterHandler} />
 			) : (

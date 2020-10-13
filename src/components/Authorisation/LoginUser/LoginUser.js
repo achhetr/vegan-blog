@@ -2,16 +2,19 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { loginUser } from '../../../redux-store/actions/auth';
+import authorisationStyle from '../authorisation.module.scss';
+import loginStyle from './login.module.scss';
+import Input from '../../Utils/Input/Input';
 
 const LoginUser = (props) => {
-	const [username, setUsername] = useState('');
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
 	const dispatch = useDispatch();
 
-	const usernameHandler = (e) => {
-		const user = e.target.value;
-		setUsername(() => user);
+	const emailHandler = (e) => {
+		const userEmail = e.target.value;
+		setEmail(() => userEmail);
 	};
 	const passwordHandler = (e) => {
 		const pass = e.target.value;
@@ -20,7 +23,7 @@ const LoginUser = (props) => {
 
 	const onSubmitLogin = (e) => {
 		e.preventDefault();
-		dispatch(loginUser({ username, password }));
+		dispatch(loginUser({ email, password }));
 	};
 
 	const registerChange = () => {
@@ -28,23 +31,39 @@ const LoginUser = (props) => {
 	};
 
 	return (
-		<div>
-			<form onSubmit={onSubmitLogin}>
-				<input
+		<div className={loginStyle.Container}>
+			<form
+				onSubmit={onSubmitLogin}
+				className={authorisationStyle.FormContainer}
+			>
+				<Input
+					id="input-email"
+					name="Enter Email"
 					type="text"
-					value={username}
-					onChange={usernameHandler}
+					value={email}
+					onChange={emailHandler}
 					placeholder="Enter username"
 				/>
-				<input
+				<Input
 					type="password"
+					id="input-password"
+					name="Enter Password"
 					value={password}
 					onChange={passwordHandler}
 					placeholder="Enter password"
 				/>
-				<input type="submit" value="login" />
+				<input
+					type="submit"
+					value="login"
+					className={loginStyle.BtnRegister}
+				/>
 			</form>
-			<button onClick={registerChange}>New User Click Here</button>
+			<button
+				onClick={registerChange}
+				className={authorisationStyle.BtnToggle}
+			>
+				New User Click Here
+			</button>
 		</div>
 	);
 };

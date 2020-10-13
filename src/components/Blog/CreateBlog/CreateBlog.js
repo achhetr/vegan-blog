@@ -6,7 +6,7 @@ import Spinner from 'react-spinner-material';
 
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 import Editor from '../../Editor/Editor';
-import Input from '../../Input/Input';
+import Input from '../../Utils/Input/Input';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {

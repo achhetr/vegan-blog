@@ -5,7 +5,7 @@ import User from '../model/User';
 
 const defaultState = {
 	userId: '',
-	loggedIn: true,
+	loggedIn: false,
 };
 
 export default (state = { ...defaultState }, action) => {

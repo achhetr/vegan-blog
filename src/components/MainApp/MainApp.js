@@ -11,12 +11,13 @@ import Blog from '../Blog/Blog';
 
 const MainApp = () => {
 	const loggedIn = useSelector((state) => state.auth.loggedIn);
+
 	return (
 		<BrowserRouter>
-			<Layout>
-				{!loggedIn ? (
-					<Authorisation />
-				) : (
+			{!loggedIn ? (
+				<Authorisation />
+			) : (
+				<Layout>
 					<Switch>
 						<Route exact path="/">
 							<HomePage />
@@ -31,8 +32,8 @@ const MainApp = () => {
 							<Blog />
 						</Route>
 					</Switch>
-				)}
-			</Layout>
+				</Layout>
+			)}
 		</BrowserRouter>
 	);
 };
