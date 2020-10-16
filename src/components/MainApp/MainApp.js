@@ -6,7 +6,6 @@ import Layout from '../Layout/Layout';
 import Authorisation from '../Authorisation/Authorisation';
 import HomePage from '../HomePage/HomePage';
 import CreateBlog from '../Blog/CreateBlog/CreateBlog';
-import CreateBlogJodit from '../Blog/CreateBlog/CreateBlogJodit';
 import Blog from '../Blog/Blog';
 
 const MainApp = () => {
@@ -24,9 +23,6 @@ const MainApp = () => {
 						</Route>
 						<Route path="/create">
 							<CreateBlog />
-						</Route>
-						<Route path="/create-jodit">
-							<CreateBlogJodit />
 						</Route>
 						<Route path="/blog">
 							<Blog />

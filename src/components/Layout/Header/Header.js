@@ -38,9 +38,6 @@ const Header = () => (
 				<div className={headerStyle.CreateBlog}>
 					<NavLink to="/create">Create Blog</NavLink>
 				</div>
-				<div className={headerStyle.CreateBlog}>
-					<NavLink to="/create-jodit">Create Jodit Blog</NavLink>
-				</div>
 			</nav>
 		</header>
 	</>
