@@ -8,25 +8,24 @@ const processImage = async (file) => {
 	let fileData = extractBaseURL(file);
 
 	//compress URL list to file then compressed file and upload to aws
-	const uploadURL = fileData.map((baseUrl) => {
+	const uploadURL = fileData.map(async (baseUrl) => {
 		// get file from base url
-		const file = processBase64Data(baseUrl);
+		const fileData = processBase64Data(baseUrl);
 
 		//get compressed file from file
 		// const compressedFile = await compressFile(file);
 		// console.log(compressedFile);
 
 		//upload file to aws and get aws url
-		const uploadUrl = uploadAws(file);
-		console.log(uploadUrl, 'checkng');
-		return uploadUrl;
+		const awsUrl = await uploadAws(fileData);
+
+		return awsUrl;
 	});
 
-	// replace base url to aws url
-	for (var i = 0; i < fileData.length; i++) {
-		file = file.replace(fileData[i], uploadURL[i]);
-	}
-	return file;
+	return {
+		fileData,
+		uploadURL,
+	};
 };
 
 export default processImage;

@@ -8,7 +8,7 @@ import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 import Editor from '../../Editor/Editor';
 import Input from '../../Utils/Input/Input';
 
-import processImage from '../../../utilities/processImage/processImage';
+import convertBlogBody from '../../../utilities/processImage/convertBlogBody';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {
@@ -58,15 +58,11 @@ const CreateBlog = (props) => {
 		dispatchBlog({ type: 'ADD_TAGS', payload: result });
 	};
 
-	const onSubmitHandler = async (e) => {
+	const onSubmitHandler = (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
 		//Processing the blog data
-		const blogBody = await processImage(blogData.blogBody);
-		setTimeout(() => {
-			setLoadingSpinner(() => false);
-			history.push('/');
-		}, 1000);
+		const blogBody = convertBlogBody(blogData.blogBody);
 
 		// passing new blogBody with aws url
 		const blog = {
@@ -75,6 +71,10 @@ const CreateBlog = (props) => {
 		};
 		console.log(blog);
 		dispatch(createBlog(blog));
+		setTimeout(() => {
+			setLoadingSpinner(() => false);
+			history.push('/');
+		}, 1000);
 	};
 
 	return (
