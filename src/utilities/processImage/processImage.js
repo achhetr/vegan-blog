@@ -14,17 +14,16 @@ const processImage = async (file) => {
 
 		//get compressed file from file
 		// const compressedFile = await compressFile(file);
-		// console.log(compressedFile);
 
 		//upload file to aws and get aws url
 		const awsUrl = await uploadAws(fileData);
-
 		return awsUrl;
 	});
+	const resolvePromise = await Promise.all(uploadURL);
 
 	return {
 		fileData,
-		uploadURL,
+		resolvePromise,
 	};
 };
 

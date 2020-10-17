@@ -58,11 +58,11 @@ const CreateBlog = (props) => {
 		dispatchBlog({ type: 'ADD_TAGS', payload: result });
 	};
 
-	const onSubmitHandler = (e) => {
+	const onSubmitHandler = async (e) => {
 		e.preventDefault();
 		setLoadingSpinner(() => true);
 		//Processing the blog data
-		const blogBody = convertBlogBody(blogData.blogBody);
+		const blogBody = await convertBlogBody(blogData.blogBody);
 
 		// passing new blogBody with aws url
 		const blog = {
