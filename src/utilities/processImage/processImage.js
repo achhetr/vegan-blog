@@ -12,10 +12,13 @@ const processImage = async (file) => {
 		// get file from base url
 		const fileData = processBase64Data(baseUrl);
 
+		console.log(fileData, 'this is fileData');
+
 		//get compressed file from file
-		// const compressedFile = await compressFile(file);
+		const compressedFile = await compressFile(fileData);
 
 		//upload file to aws and get aws url
+		// const awsUrl = await uploadAws(compressedFile);
 		const awsUrl = await uploadAws(fileData);
 		return awsUrl;
 	});

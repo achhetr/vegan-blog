@@ -7,7 +7,17 @@ export default async (file) => {
 		useWebWorker: true,
 	};
 	try {
+		console.log(file, 'this is from compress');
 		const compressedFile = await imageCompression(file, options);
+		console.log(
+			'compressedFile instanceof Blob',
+			compressedFile instanceof Blob
+		); // true
+
+		console.log(
+			`compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+		); // smaller than maxSizeMB
+
 		return compressedFile;
 	} catch (err) {
 		console.log(err, 'super hero');
