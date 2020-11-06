@@ -1,0 +1,22 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-veganblog-dev-83418-authRole",
+      "UnauthRoleArn": "arn:aws:iam::229595614191:role/amplify-veganblog-dev-83418-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::229595614191:role/amplify-veganblog-dev-83418-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-veganblog-dev-83418-deployment",
+      "UnauthRoleName": "amplify-veganblog-dev-83418-unauthRole",
+      "StackName": "amplify-veganblog-dev-83418",
+      "StackId": "arn:aws:cloudformation:us-east-1:229595614191:stack/amplify-veganblog-dev-83418/d806e660-2077-11eb-b786-0a5afd1032bb",
+      "AmplifyAppId": "d10w7r6sz5tu7r"
+    },
+    "categories": {
+      "auth": {
+        "veganblog9c3c6325": {
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"1052449976139-husmq8ik0illrn01uovjqpan3s9kbhj4.apps.googleusercontent.com\",\"client_secret\":\"L8C5e-SaxosBV2WMb-cNMEmU\"}]"
+        }
+      }
+    }
+  }
+}

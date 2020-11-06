@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "veganblog9c3c6325": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
