@@ -1,3 +1,5 @@
+// import { v4 as uuidv4 } from 'uuid';
+
 export default class Blog {
 	constructor(id, title, blogBody, imageUrl, tags) {
 		this.id = id;

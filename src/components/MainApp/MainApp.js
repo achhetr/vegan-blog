@@ -1,37 +1,22 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { BrowserRouter, Switch, Route as PublicRoute } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
-import Authorisation from '../Authorisation/Authorisation';
 import HomePage from '../HomePage/HomePage';
 import CreateBlog from '../Blog/CreateBlog/CreateBlog';
 import Blog from '../Blog/Blog';
+import PrivateRoute from '../../AppRouter/PrivateRoute';
 
-const MainApp = () => {
-	const loggedIn = useSelector((state) => state.auth.loggedIn);
-
-	return (
-		<BrowserRouter>
-			{!loggedIn ? (
-				<Authorisation />
-			) : (
-				<Layout>
-					<Switch>
-						<Route exact path="/">
-							<HomePage />
-						</Route>
-						<Route path="/create">
-							<CreateBlog />
-						</Route>
-						<Route path="/blog">
-							<Blog />
-						</Route>
-					</Switch>
-				</Layout>
-			)}
-		</BrowserRouter>
-	);
-};
+const MainApp = () => (
+	<BrowserRouter>
+		<Layout>
+			<Switch>
+				<PublicRoute exact path="/" component={HomePage} />
+				<PrivateRoute path="/create" component={CreateBlog} />
+				<PrivateRoute path="/blog" component={Blog} />
+			</Switch>
+		</Layout>
+	</BrowserRouter>
+);
 
 export default MainApp;

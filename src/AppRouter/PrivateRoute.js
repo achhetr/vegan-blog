@@ -2,17 +2,18 @@ import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-export const PrivateRoute = (props) => {
+const PrivateRoute = (props) => {
 	const { component: Component, ...options } = props;
-	// const authToken = useSelector((state) => state.reducers.auth);
-	const authToken = true;
+	const authToken = useSelector((state) => state.auth.authToken);
 	return (
 		<div>
 			{authToken ? (
 				<Route {...options} render={(props) => <Component />} />
 			) : (
-				<Redirect to="/login" />
+				<Redirect to="/home" />
 			)}
 		</div>
 	);
 };
+
+export default PrivateRoute;
