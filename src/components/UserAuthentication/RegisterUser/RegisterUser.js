@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { registerUser } from '../../../redux-store/actions/auth';
+import { registerWithEmail } from '../../../redux-store/actions/auth';
 import Input from '../../Utils/Input/Input';
 import registerStyle from './register.module.scss';
-import authorisationStyle from '../authorisation.module.scss';
 
 const RegisterUser = (props) => {
 	const [email, setEmail] = useState('');
-	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -26,19 +24,19 @@ const RegisterUser = (props) => {
 		const pass = e.target.value;
 		setConfirmPassword(() => pass);
 	};
-	const nameHandler = (e) => {
-		const name = e.target.value;
-		setName(() => name);
-	};
 
 	const onSubmitRegister = (e) => {
 		e.preventDefault();
-		dispatch(registerUser({ name, email, password }));
+		console.log(confirmPassword, password, email);
+		if (confirmPassword === password && password.length > 0 && email) {
+			dispatch(registerWithEmail({ email, password }));
+		} else {
+			alert('Check karo kuch');
+		}
 	};
-
-	const registerChange = () => {
-		props.onChange();
-	};
+	useEffect(() => {
+		console.log('from register');
+	});
 
 	return (
 		<div className={registerStyle.Container}>
@@ -48,17 +46,7 @@ const RegisterUser = (props) => {
 					<h4>Let's get you on board'</h4>
 				</legend>
 
-				<form
-					onSubmit={onSubmitRegister}
-					className={authorisationStyle.FormContainer}
-				>
-					<Input
-						id="input-fullname"
-						name="Full Name *"
-						value={name}
-						onChange={nameHandler}
-						placeholder="Enter Your Name"
-					/>
+				<form onSubmit={onSubmitRegister}>
 					<Input
 						id="input-email"
 						name="Email *"
@@ -75,6 +63,7 @@ const RegisterUser = (props) => {
 						onChange={passwordHandler}
 						placeholder="Enter password"
 					/>
+
 					<Input
 						id="input-confirm-password"
 						name="Confirm Password *"
@@ -90,12 +79,6 @@ const RegisterUser = (props) => {
 					/>
 				</form>
 			</fieldset>
-			<button
-				onClick={registerChange}
-				className={authorisationStyle.BtnToggle}
-			>
-				Already User Click Here
-			</button>
 		</div>
 	);
 };

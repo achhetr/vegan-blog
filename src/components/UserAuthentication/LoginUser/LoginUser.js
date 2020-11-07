@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { loginUser } from '../../../redux-store/actions/auth';
-import authorisationStyle from '../authorisation.module.scss';
+import { loginWithEmail, logout } from '../../../redux-store/actions/auth';
 import loginStyle from './login.module.scss';
 import Input from '../../Utils/Input/Input';
 
@@ -23,19 +22,12 @@ const LoginUser = (props) => {
 
 	const onSubmitLogin = (e) => {
 		e.preventDefault();
-		dispatch(loginUser({ email, password }));
-	};
-
-	const registerChange = () => {
-		props.onChange();
+		dispatch(loginWithEmail({ email, password }));
 	};
 
 	return (
 		<div className={loginStyle.Container}>
-			<form
-				onSubmit={onSubmitLogin}
-				className={authorisationStyle.FormContainer}
-			>
+			<form onSubmit={onSubmitLogin}>
 				<Input
 					id="input-email"
 					name="Enter Email"
@@ -58,12 +50,7 @@ const LoginUser = (props) => {
 					className={loginStyle.BtnRegister}
 				/>
 			</form>
-			<button
-				onClick={registerChange}
-				className={authorisationStyle.BtnToggle}
-			>
-				New User Click Here
-			</button>
+			<button onClick={() => logout()}>Sign out</button>
 		</div>
 	);
 };

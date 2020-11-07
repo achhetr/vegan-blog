@@ -1,28 +1,32 @@
 import * as actionTypes from '../actions/authActionTypes';
 
 const defaultUser = {
-	userAuthenticated: null,
+	userAuthenticated: false,
 	authToken: false,
-	userSaved: null,
+	user: null,
+	loginBy: '',
 };
 
 const reducers = (state = { ...defaultUser }, action) => {
 	switch (action.type) {
-		// case actionTypes.LOGIN:
-		// 	return {
-		// 		email: action.payload.email,
-		// 		auth: true,
-		// 	};
+		case actionTypes.LOGIN:
+			return {
+				user: action.payload.user,
+				authToken: true,
+				loginBy: action.payload.loginBy,
+			};
 
-		// case actionTypes.REGISTER:
-		// 	return {
-		// 		email: action.payload.email,
-		// 		auth: true,
-		// 	};
-		// case actionTypes.LOGOUT:
-		// 	return {
-		// 		...defaultUser,
-		// 	};
+		case actionTypes.REGISTER:
+			return {
+				user: action.payload.user,
+				authToken: true,
+				loginBy: action.payload.loginBy,
+			};
+
+		case actionTypes.LOGOUT:
+			return {
+				...defaultUser,
+			};
 
 		default:
 			return state;

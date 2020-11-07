@@ -34,6 +34,16 @@ const Header = () => (
 							Contact
 						</NavLink>
 					</li>
+					<li>
+						<NavLink to="/login" className={headerStyle.NavLink}>
+							Login
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to="/register" className={headerStyle.NavLink}>
+							Register
+						</NavLink>
+					</li>
 				</ol>
 				<div className={headerStyle.CreateBlog}>
 					<NavLink to="/create">Create Blog</NavLink>

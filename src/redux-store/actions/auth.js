@@ -1,20 +1,21 @@
 import * as actionTypes from './authActionTypes';
 import { Auth } from 'aws-amplify';
 
-export const loginUser = ({ email }) => {
+const loginUser = ({ user, loginBy }) => {
 	return {
 		type: actionTypes.LOGIN,
 		payload: {
-			email,
+			user,
+			loginBy,
 		},
 	};
 };
-
-export const registerUser = ({ email }) => {
+const registerUser = ({ user, loginBy }) => {
 	return {
 		type: actionTypes.REGISTER,
 		payload: {
-			email,
+			user,
+			loginBy,
 		},
 	};
 };
@@ -28,40 +29,50 @@ export const logout = () => {
 	};
 };
 
-// error in this step
-export const loginWithGoogle = () => {
+export const loginWithEmail = ({ email, password }) => {
 	return async (dispatch) => {
-		try {
-			const result = await Auth.federatedSignIn({ provider: 'Google' });
-			const user = await Auth.currentAuthenticatedUser();
-			const email = user.attributes.email;
-
-			// console.log(result, 'Result from google');
-
-			return dispatch(loginUser({ email }));
-		} catch (error) {
-			console.log('User is not logged in');
-		}
+		const user = await Auth.signIn(email, password);
+		console.log(user, 'login user');
+		return dispatch(loginUser({ user, loginBy: 'email' }));
 	};
 };
 
-export const loginWithAuth = ({ email, password }) => {
+export const registerWithEmail = ({ email, password }) => {
 	return async (dispatch) => {
-		console.log('I am working from login auth');
-		await Auth.signIn(email, password);
-		return dispatch(loginUser({ email }));
-	};
-};
-export const registerWithAuth = ({ email, password }) => {
-	return async (dispatch) => {
-		console.log('I am working from register auth');
-		await Auth.signUp({
+		const user = await Auth.signUp({
 			username: email,
 			password,
 			attributes: {
 				email,
 			},
 		});
-		return dispatch(registerUser({ email }));
+		return dispatch(registerUser({ user, loginBy: 'email' }));
+	};
+};
+
+// error in this step
+export const loginWithGoogle = () => {
+	return async (dispatch) => {
+		try {
+			await Auth.federatedSignIn({ provider: 'Google' });
+			const user = await Auth.currentAuthenticatedUser();
+
+			return dispatch(loginUser({ user, loginBy: 'google' }));
+		} catch (error) {
+			console.log('User is not logged in by google');
+		}
+	};
+};
+
+export const loginWithFacebook = () => {
+	return async (dispatch) => {
+		try {
+			await Auth.federatedSignIn({ provider: 'Facebook' });
+			const user = await Auth.currentAuthenticatedUser();
+
+			return dispatch(loginUser({ user, loginBy: 'facebook' }));
+		} catch (error) {
+			console.log('User is not logged in by facebook');
+		}
 	};
 };
