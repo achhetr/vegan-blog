@@ -21,45 +21,54 @@ const registerUser = ({ user, loginBy }) => {
 };
 
 export const logout = () => {
-	return (dispatch) => {
-		Auth.signOut();
-		return dispatch({
-			type: actionTypes.LOGOUT,
-		});
+	return async (dispatch) => {
+		try {
+			await Auth.signOut();
+			return dispatch({
+				type: actionTypes.LOGOUT,
+			});
+		} catch (error) {
+			console.error('Error in sign out', error);
+		}
 	};
 };
 
 export const loginWithEmail = ({ email, password }) => {
 	return async (dispatch) => {
-		const user = await Auth.signIn(email, password);
-		console.log(user, 'login user');
-		return dispatch(loginUser({ user, loginBy: 'email' }));
+		try {
+			const user = await Auth.signIn(email, password);
+			return dispatch(loginUser({ user, loginBy: 'email' }));
+		} catch (error) {
+			console.error('Error in login', error);
+		}
 	};
 };
 
 export const registerWithEmail = ({ email, password }) => {
 	return async (dispatch) => {
-		const user = await Auth.signUp({
-			username: email,
-			password,
-			attributes: {
-				email,
-			},
-		});
-		return dispatch(registerUser({ user, loginBy: 'email' }));
+		try {
+			const user = await Auth.signUp({
+				username: email,
+				password,
+				attributes: {
+					email,
+				},
+			});
+			return dispatch(registerUser({ user, loginBy: 'email' }));
+		} catch (error) {
+			console.error('Error in register', error);
+		}
 	};
 };
 
-// error in this step
 export const loginWithGoogle = () => {
 	return async (dispatch) => {
 		try {
 			await Auth.federatedSignIn({ provider: 'Google' });
 			const user = await Auth.currentAuthenticatedUser();
-
 			return dispatch(loginUser({ user, loginBy: 'google' }));
 		} catch (error) {
-			console.log('User is not logged in by google');
+			console.error('Error in user login by google', error);
 		}
 	};
 };
@@ -69,10 +78,9 @@ export const loginWithFacebook = () => {
 		try {
 			await Auth.federatedSignIn({ provider: 'Facebook' });
 			const user = await Auth.currentAuthenticatedUser();
-
 			return dispatch(loginUser({ user, loginBy: 'facebook' }));
 		} catch (error) {
-			console.log('User is not logged in by facebook');
+			console.error('Error in user login by facebook', error);
 		}
 	};
 };

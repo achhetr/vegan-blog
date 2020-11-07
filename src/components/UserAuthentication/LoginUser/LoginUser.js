@@ -50,7 +50,7 @@ const LoginUser = (props) => {
 					className={loginStyle.BtnRegister}
 				/>
 			</form>
-			<button onClick={() => logout()}>Sign out</button>
+			<button onClick={() => dispatch(logout())}>Sign out</button>
 		</div>
 	);
 };

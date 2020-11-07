@@ -19,24 +19,22 @@ const Authentication = () => {
 		return;
 	};
 
-	const hubListener = (data) => {
-		const { payload } = data;
-		console.log('A new auth event has happened: ', data, payload.event);
-		switch (payload.event) {
-			case 'signIn':
-				getAuthenticatedUser();
-				console.log('a user has signed in!');
-				break;
-			case 'signOut':
-				console.log('a user has signed out!');
-				break;
-			default:
-				console.log(payload.event, 'switch k andar');
-		}
-	};
-
 	useEffect(() => {
-		console.log('check me for authentication');
+		const hubListener = (data) => {
+			const { payload } = data;
+			console.log('A new auth event has happened: ', data, payload.event);
+			switch (payload.event) {
+				case 'signIn':
+					getAuthenticatedUser();
+					console.log('a user has signed in!');
+					break;
+				case 'signOut':
+					console.log('a user has signed out!');
+					break;
+				default:
+					console.log(payload.event);
+			}
+		};
 		Hub.listen('auth', hubListener);
 	}, []);
 
