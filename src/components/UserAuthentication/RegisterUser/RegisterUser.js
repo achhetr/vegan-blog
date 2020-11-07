@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { registerWithEmail } from '../../../redux-store/actions/auth';
-import Input from '../../Utils/Input/Input';
 import registerStyle from './register.module.scss';
 
 const RegisterUser = (props) => {
@@ -40,47 +39,59 @@ const RegisterUser = (props) => {
 
 	return (
 		<div className={registerStyle.Container}>
-			<h2>Register</h2>
-			<fieldset className={registerStyle.FieldContainer}>
-				<legend>
-					<h4>Let's get you on board'</h4>
-				</legend>
-
-				<form onSubmit={onSubmitRegister}>
-					<Input
-						id="input-email"
-						name="Email *"
-						type="email"
-						value={email}
-						onChange={emailHandler}
-						placeholder="Enter email"
-					/>
-					<Input
-						id="input-password"
-						name="Password *"
-						type="password"
-						value={password}
-						onChange={passwordHandler}
-						placeholder="Enter password"
-					/>
-
-					<Input
-						id="input-confirm-password"
-						name="Confirm Password *"
-						type="password"
-						value={confirmPassword}
-						onChange={confirmPasswordHandler}
-						placeholder="Enter password"
-					/>
-					<input
-						type="submit"
-						value="Sign Up"
-						className={registerStyle.BtnRegister}
-					/>
+			<div className={registerStyle.LeftContainer}>
+				<h1>
+					Welcome to Vegan Community, this community is currently with
+					50,000+ active users
+				</h1>
+			</div>
+			<div className={registerStyle.RightContainer}>
+				<h2>Sign Up</h2>
+				<form
+					onSubmit={onSubmitRegister}
+					className={registerStyle.FormContainer}
+				>
+					<input placeholder="Email address" />
+					<input placeholder="Password" />
+					<input type="submit" value="Sign up" />
 				</form>
-			</fieldset>
+			</div>
 		</div>
 	);
 };
 
 export default RegisterUser;
+
+{
+	/* <Input
+					id="input-email"
+					name="Email *"
+					type="email"
+					value={email}
+					onChange={emailHandler}
+					placeholder="Enter email"
+				/>
+				<Input
+					id="input-password"
+					name="Password *"
+					type="password"
+					value={password}
+					onChange={passwordHandler}
+					placeholder="Enter password"
+				/>
+
+				<Input
+					id="input-confirm-password"
+					name="Confirm Password *"
+					type="password"
+					value={confirmPassword}
+					onChange={confirmPasswordHandler}
+					placeholder="Enter password"
+				/>
+				<input
+					type="submit"
+					value="Sign Up"
+					className={registerStyle.BtnRegister}
+				/>
+			</form> */
+}

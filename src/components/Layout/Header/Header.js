@@ -20,11 +20,6 @@ const Header = () => (
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/about" className={headerStyle.NavLink}>
-							About
-						</NavLink>
-					</li>
-					<li>
 						<NavLink to="/blog" className={headerStyle.NavLink}>
 							Blog
 						</NavLink>

@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const PrivateRoute = (props) => {
 	const { component: Component, ...options } = props;
 	const authToken = useSelector((state) => state.auth.authToken);
+	console.log(authToken, 'Authentication token');
 	return (
 		<div>
 			{authToken ? (
