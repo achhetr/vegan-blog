@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 
 import { loginWithEmail, logout } from '../../../redux-store/actions/auth';
 import loginStyle from './login.module.scss';
-import Input from '../../Utils/Input/Input';
 
 const LoginUser = (props) => {
 	const [email, setEmail] = useState('');
@@ -28,7 +27,7 @@ const LoginUser = (props) => {
 	return (
 		<div className={loginStyle.Container}>
 			<form onSubmit={onSubmitLogin}>
-				<Input
+				<input
 					id="input-email"
 					name="Enter Email"
 					type="text"
@@ -36,7 +35,7 @@ const LoginUser = (props) => {
 					onChange={emailHandler}
 					placeholder="Enter username"
 				/>
-				<Input
+				<input
 					type="password"
 					id="input-password"
 					name="Enter Password"

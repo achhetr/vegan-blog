@@ -1,1 +1,13 @@
 @import './base-layout';
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+input {
+	padding: 0;
+	margin: 0;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { registerWithEmail } from '../../../redux-store/actions/auth';
+import Input from '../../Input/Input';
 import registerStyle from './register.module.scss';
 
 const RegisterUser = (props) => {
@@ -40,10 +41,12 @@ const RegisterUser = (props) => {
 	return (
 		<div className={registerStyle.Container}>
 			<div className={registerStyle.LeftContainer}>
-				<h1>
-					Welcome to Vegan Community, this community is currently with
-					50,000+ active users
+				<h1 className={registerStyle.LeftContainerTitle}>
+					Welcome to <span>Vegan World</span>
 				</h1>
+				<p className={registerStyle.LeftContainerContent}>
+					This community is currently with 50,000+ active users
+				</p>
 			</div>
 			<div className={registerStyle.RightContainer}>
 				<h2>Sign Up</h2>
@@ -51,8 +54,8 @@ const RegisterUser = (props) => {
 					onSubmit={onSubmitRegister}
 					className={registerStyle.FormContainer}
 				>
-					<input placeholder="Email address" />
-					<input placeholder="Password" />
+					<Input type="text" placeholder="Email address" />
+					<Input type="password" placeholder="Password" />
 					<input type="submit" value="Sign up" />
 				</form>
 			</div>

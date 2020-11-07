@@ -6,7 +6,6 @@ import Spinner from 'react-spinner-material';
 
 import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 import Editor from '../../Editor/Editor';
-import Input from '../../Utils/Input/Input';
 
 import convertBlogBody from '../../../utilities/processImage/convertBlogBody';
 
@@ -98,14 +97,14 @@ const CreateBlog = (props) => {
 					</div>
 					<form onSubmit={onSubmitHandler}>
 						<h2>CREATE BLOG</h2>
-						<Input
+						<input
 							id="input-title"
 							name="Blog Title"
 							placeholder="Title"
 							value={blogData.title}
 							onChange={onSetTitleHandler}
 						/>
-						<Input
+						<input
 							id="input-tags"
 							name="Enter Tags"
 							placeholder="Tags"

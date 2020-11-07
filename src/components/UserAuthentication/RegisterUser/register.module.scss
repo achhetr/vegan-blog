@@ -1,36 +1,69 @@
+@import '../../../styles/base_colors';
+
 .Container {
-	background-color: pink;
-	min-height: 75vh;
-	padding: 4rem 6rem;
+	min-height: 95vh;
 	display: flex;
+	flex: 1;
+	background: linear-gradient(
+		-45deg,
+		$primary_purple_color,
+		$secondary_green_color
+	);
 }
 
 .LeftContainer,
 .RightContainer {
+	display: flex;
 	width: 50%;
+	padding: 0;
+	padding-left: 4rem;
+	color: white;
+}
+/* Left Container styling*/
+.LeftContainer {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
+.LeftContainerTitle {
+	font-weight: 200;
+	font-size: 2rem;
+
+	span {
+		border: 1px solid black;
+		padding: 0.4rem;
+		background-color: $primary_green_color;
+		border-radius: 0.4rem;
+		font-weight: 400;
+	}
+}
+
+.LeftContainerContent {
+	font-weight: 500;
+	font-size: 2rem;
+	text-align: center;
+}
+
+/*Right Container styling*/
 .RightContainer {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-start;
+	justify-content: center;
+
+	h2 {
+		font-weight: 300;
+		font-size: 2rem;
+		border-bottom: 1px solid $secondary_green_color;
+		padding-bottom: 0.4rem;
+	}
 }
 
 .FormContainer {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
-	flex: 1;
-}
-
-.BtnRegister {
-	padding: 0.4rem 2rem;
-	background-color: blue;
-	color: white;
-	border: 1px solid white;
-	border-radius: 0.4rem;
-	&:hover {
-		background-color: lighten($color: blue, $amount: 10%);
-	}
+	justify-content: center;
+	width: 70%;
 }
