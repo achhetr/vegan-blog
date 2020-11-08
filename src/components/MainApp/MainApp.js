@@ -7,7 +7,7 @@ import CreateBlog from '../Blog/CreateBlog/CreateBlog';
 import Blog from '../Blog/Blog';
 
 import PrivateRoute from '../../AppRouter/PrivateRoute';
-import Authorisation from '../UserAuthentication/Authorisation';
+import Authorisation from '../Authorisation/Authorisation';
 const MainApp = () => (
 	<BrowserRouter>
 		<Layout>

@@ -3,11 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Input from '../../Input/Input';
+import Loading from '../../Loading/Loading';
 import { loginWithEmail } from '../../../redux-store/actions/auth';
 import loginStyle from './login.module.scss';
 
 const LoginUser = () => {
 	const history = useHistory();
+	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -24,8 +26,14 @@ const LoginUser = () => {
 
 	const onSubmitLogin = (e) => {
 		e.preventDefault();
+		setLoading(() => true);
 		dispatch(loginWithEmail({ email, password }));
+		setInterval(() => {
+			setLoading(() => false);
+		}, 5000);
 	};
+
+	if (loading) return <Loading />;
 
 	return (
 		<>

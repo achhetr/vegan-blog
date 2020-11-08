@@ -4,11 +4,12 @@ import { useHistory } from 'react-router-dom';
 
 import { registerWithEmail } from '../../../redux-store/actions/auth';
 import Input from '../../Input/Input';
+import Loading from '../../Loading/Loading';
 import registerStyle from './register.module.scss';
 
 const RegisterUser = () => {
 	const history = useHistory();
-
+	const [loading, setLoading] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
@@ -30,13 +31,15 @@ const RegisterUser = () => {
 
 	const onSubmitRegister = (e) => {
 		e.preventDefault();
-		console.log(confirmPassword, password, email);
 		if (confirmPassword === password && password.length > 0 && email) {
+			setLoading(() => true);
 			dispatch(registerWithEmail({ email, password }));
 		} else {
 			alert('Something is incorrect');
 		}
 	};
+
+	if (loading) return <Loading />;
 
 	return (
 		<>
