@@ -67,3 +67,37 @@
 	justify-content: center;
 	width: 70%;
 }
+
+.FormCheckBox {
+	margin: 1rem 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+
+	label span {
+		text-decoration: underline;
+	}
+}
+
+.SubmitBtn {
+	background: $secondary_purple_color;
+	padding: 0.5rem 1rem;
+	border: 1px solid $primary_purple_color;
+	border-left: 3px solid darken($primary_purple_color, 10%);
+	border-bottom: 3px solid darken($primary_purple_color, 10%);
+	border-radius: 0.5rem;
+	color: white;
+	font-weight: 700;
+
+	&:hover,
+	&:focus {
+		background: lighten($secondary_purple_color, 10%);
+		border: 1px solid transparent;
+		border-left: 3px solid transparent;
+		border-bottom: 3px solid transparent;
+		cursor: pointer;
+		color: $primary_font_color;
+	}
+}

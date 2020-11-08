@@ -56,7 +56,20 @@ const RegisterUser = (props) => {
 				>
 					<Input type="text" placeholder="Email address" />
 					<Input type="password" placeholder="Password" />
-					<input type="submit" value="Sign up" />
+					<Input type="password" placeholder="Confirm Password" />
+					<div className={registerStyle.FormCheckBox}>
+						<input type="checkbox" id="condition" />
+						<label for="condition">
+							I agree all statements in{' '}
+							<span>terms and conditions</span>
+						</label>
+					</div>
+
+					<input
+						type="submit"
+						value="Sign up"
+						className={registerStyle.SubmitBtn}
+					/>
 				</form>
 			</div>
 		</div>
