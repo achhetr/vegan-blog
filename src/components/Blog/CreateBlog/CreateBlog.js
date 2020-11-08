@@ -1,13 +1,12 @@
 import React, { useState, useReducer } from 'react';
 import { useDispatch } from 'react-redux';
-import { createBlog } from '../../../redux-store/actions/blog';
 import { useHistory } from 'react-router-dom';
-import Spinner from 'react-spinner-material';
 
-import BlogLayout from '../BlogComponent/BlogLayout/BlogLayout';
 import Editor from '../../Editor/Editor';
-
+import { createBlog } from '../../../redux-store/actions/blog';
 import convertBlogBody from '../../../utilities/processImage/convertBlogBody';
+import createBlogStyle from './createBlog.module.scss';
+import './quill.scss';
 
 const defaultState = { title: '', blogBody: '', imageUrl: '', tags: '' };
 const stateReducer = (state, action) => {
@@ -39,8 +38,6 @@ const stateReducer = (state, action) => {
 const CreateBlog = (props) => {
 	const [blogData, dispatchBlog] = useReducer(stateReducer, defaultState);
 
-	const [loadingSpinner, setLoadingSpinner] = useState(false);
-
 	const dispatch = useDispatch();
 	const history = useHistory();
 
@@ -59,7 +56,6 @@ const CreateBlog = (props) => {
 
 	const onSubmitHandler = async (e) => {
 		e.preventDefault();
-		setLoadingSpinner(() => true);
 		//Processing the blog data
 		const blogBody = await convertBlogBody(blogData.blogBody);
 
@@ -71,53 +67,38 @@ const CreateBlog = (props) => {
 		console.log(blog);
 		dispatch(createBlog(blog));
 		setTimeout(() => {
-			setLoadingSpinner(() => false);
 			history.push('/');
-		}, 1000);
+		}, 0);
 	};
 
 	return (
-		<>
-			{loadingSpinner ? (
-				<Spinner
-					radius={60}
-					color={'#d64747'}
-					stroke={2}
-					visible={true}
-				/>
-			) : (
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-					}}
+		<div className={createBlogStyle.Container}>
+			<div className={createBlogStyle.LeftContainer}>
+				<form
+					onSubmit={onSubmitHandler}
+					className={createBlogStyle.FormContainer}
 				>
-					<div>
-						<BlogLayout blog={blogData} />
-					</div>
-					<form onSubmit={onSubmitHandler}>
-						<h2>CREATE BLOG</h2>
-						<input
-							id="input-title"
-							name="Blog Title"
-							placeholder="Title"
-							value={blogData.title}
-							onChange={onSetTitleHandler}
-						/>
-						<input
-							id="input-tags"
-							name="Enter Tags"
-							placeholder="Tags"
-							value={blogData.tags}
-							onChange={onSetTags}
-						/>
+					<input
+						placeholder="Blog Title &#xf040;"
+						value={blogData.title}
+						onChange={onSetTitleHandler}
+					/>
+					<input
+						placeholder="Tags &#xf02c;"
+						value={blogData.tags}
+						onChange={onSetTags}
+					/>
+					<div className={createBlogStyle.EditorContainer}>
 						<Editor onContentChange={onSetBlogBody} />
+					</div>
 
-						<input type="submit" value="submit" />
-					</form>
-				</div>
-			)}
-		</>
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+			<div className={createBlogStyle.RightContainer}>
+				this is right container
+			</div>
+		</div>
 	);
 };
 

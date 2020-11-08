@@ -3,7 +3,7 @@ import { Auth } from 'aws-amplify';
 
 const defaultUser = {
 	userAuthenticated: false,
-	authToken: false,
+	authToken: true,
 	user: null,
 	loginBy: '',
 };

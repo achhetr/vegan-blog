@@ -1,0 +1,62 @@
+@import '../../../styles/base_colors';
+
+.quill {
+	border: none;
+	border: 1px solid rgb(22, 4, 4);
+	border-radius: 0.4rem;
+	-webkit-box-shadow: 2px 12px 24px -2px rgba(0, 0, 0, 0.69);
+	box-shadow: 2px 12px 24px -2px rgba(0, 0, 0, 0.69);
+	height: 100%;
+	overflow: hidden;
+}
+
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+	border: none;
+}
+
+.ql-toolbar.ql-snow {
+	background-color: $secondary_purple_color;
+	padding: 1rem;
+}
+
+.ql-editor {
+	color: white;
+
+	h1 {
+		font-size: 4rem;
+	}
+
+	h2 {
+		font-size: 2rem;
+	}
+
+	p {
+		font-size: 1.5rem;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		padding: 2rem;
+		display: block;
+	}
+
+	.ql-video {
+		@extend img;
+		padding: 2rem 0;
+		width: 100%;
+		max-height: 100%;
+	}
+}
+
+.ql-snow .ql-editing {
+	margin-left: 4rem;
+	min-width: 50%;
+	padding: 0.5rem 1rem;
+	transform: translateY(0);
+}
+
+.ql-snow .ql-editing input {
+	color: black;
+}
