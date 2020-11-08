@@ -1,12 +1,11 @@
 import React from 'react';
 import inputStyle from './input.module.scss';
 
-const Input = ({ placeholder, type, value, onChange, required }) => (
+const Input = ({ placeholder, type, value, onChange }) => (
 	<div className={inputStyle.InputContainer}>
 		<input
 			className={inputStyle.Input}
 			type={type}
-			required={required}
 			name="name"
 			value={value}
 			onChange={onChange}

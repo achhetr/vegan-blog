@@ -10,6 +10,7 @@ import registerStyle from './register.module.scss';
 const RegisterUser = () => {
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
+	const [agreeTC, setAgreeTC] = useState(false);
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
@@ -28,10 +29,18 @@ const RegisterUser = () => {
 		const pass = e.target.value;
 		setConfirmPassword(() => pass);
 	};
+	const agreeTCHandler = () => {
+		setAgreeTC((prev) => !prev);
+	};
 
 	const onSubmitRegister = (e) => {
 		e.preventDefault();
-		if (confirmPassword === password && password.length > 0 && email) {
+		if (
+			confirmPassword === password &&
+			password.length > 0 &&
+			email &&
+			agreeTC
+		) {
 			setLoading(() => true);
 			dispatch(registerWithEmail({ email, password }));
 		} else {
@@ -53,26 +62,28 @@ const RegisterUser = () => {
 					placeholder="Email address"
 					value={email}
 					onChange={emailHandler}
-					required={true}
 				/>
 				<Input
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={passwordHandler}
-					required={true}
 				/>
 				<Input
 					type="password"
 					placeholder="Confirm Password"
 					value={confirmPassword}
 					onChange={confirmPasswordHandler}
-					required={true}
 				/>
 				<div className={registerStyle.FormCheckBox}>
-					<input type="checkbox" id="condition" />
-					<label for="condition">
-						I agree all statements in{' '}
+					<input
+						type="checkbox"
+						id="condition"
+						value={agreeTC}
+						onChange={agreeTCHandler}
+					/>
+					<label htmlFor="condition">
+						Please confirm that you agree to all{' '}
 						<span>terms and conditions</span>
 					</label>
 				</div>

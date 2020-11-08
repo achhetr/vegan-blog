@@ -12,7 +12,7 @@ const Authorisation = ({ login }) => {
 					Welcome to <span>Vegan World</span>
 				</h1>
 				<p className={authStyle.LeftContainerContent}>
-					This community is currently with 50,000+ active users
+					This community is currently active with 50,000+ users
 				</p>
 			</div>
 			<div className={authStyle.RightContainer}>

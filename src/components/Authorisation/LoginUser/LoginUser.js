@@ -4,7 +4,11 @@ import { useHistory } from 'react-router-dom';
 
 import Input from '../../Input/Input';
 import Loading from '../../Loading/Loading';
-import { loginWithEmail } from '../../../redux-store/actions/auth';
+import {
+	loginWithEmail,
+	loginWithGoogle,
+	loginWithFacebook,
+} from '../../../redux-store/actions/auth';
 import loginStyle from './login.module.scss';
 
 const LoginUser = () => {
@@ -28,9 +32,6 @@ const LoginUser = () => {
 		e.preventDefault();
 		setLoading(() => true);
 		dispatch(loginWithEmail({ email, password }));
-		setInterval(() => {
-			setLoading(() => false);
-		}, 5000);
 	};
 
 	if (loading) return <Loading />;
@@ -44,14 +45,12 @@ const LoginUser = () => {
 					placeholder="Email address"
 					value={email}
 					onChange={emailHandler}
-					required={true}
 				/>
 				<Input
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={passwordHandler}
-					required={true}
 				/>
 				<div className={loginStyle.BtnContainer}>
 					<input
@@ -61,31 +60,31 @@ const LoginUser = () => {
 					/>
 					<input
 						type="button"
-						value="I dont' have account"
+						value="I dont' have an account"
 						className={loginStyle.ChangeLink}
 						onClick={() => {
 							history.push('/register');
 						}}
 					/>
 				</div>
-
-				<div className={loginStyle.SocialBtnContainer}>
-					<button>
-						<img
-							src="https://www.flaticon.com/svg/static/icons/svg/281/281764.svg"
-							alt="google"
-						/>
-						Sign in
-					</button>
-					<button>
-						<img
-							src="https://www.flaticon.com/svg/static/icons/svg/733/733547.svg"
-							alt="google"
-						/>
-						Sign in
-					</button>
-				</div>
 			</form>
+			<div className={loginStyle.SocialBtnContainer}>
+				<button onClick={() => dispatch(loginWithGoogle())}>
+					<img
+						src="https://www.flaticon.com/svg/static/icons/svg/281/281764.svg"
+						alt="google"
+					/>
+					Sign in
+				</button>
+
+				<button onClick={() => dispatch(loginWithFacebook())}>
+					<img
+						src="https://www.flaticon.com/svg/static/icons/svg/733/733547.svg"
+						alt="facebook"
+					/>
+					Sign in
+				</button>
+			</div>
 		</>
 	);
 };
