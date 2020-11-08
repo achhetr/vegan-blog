@@ -27,13 +27,13 @@
 
 .BtnContainer {
 	display: flex;
+	margin-top: 1rem;
 	justify-content: flex-start;
 	flex-wrap: wrap;
 	align-items: center;
 	width: 100%;
 
 	.SubmitBtn {
-		margin-top: 1rem;
 		background: $secondary_purple_color;
 		padding: 0.5rem 1rem;
 		border: 1px solid $primary_purple_color;

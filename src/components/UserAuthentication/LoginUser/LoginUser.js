@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Input from '../../Input/Input';
 import { loginWithEmail, logout } from '../../../redux-store/actions/auth';
@@ -42,6 +43,23 @@ const LoginUser = (props) => {
 						value="I dont' have account"
 						className={loginStyle.ChangeLink}
 					/>
+				</div>
+
+				<div className={loginStyle.SocialBtnContainer}>
+					<button>
+						<img
+							src="https://www.flaticon.com/svg/static/icons/svg/281/281764.svg"
+							alt="google"
+						/>
+						Sign in
+					</button>
+					<button>
+						<img
+							src="https://www.flaticon.com/svg/static/icons/svg/733/733547.svg"
+							alt="google"
+						/>
+						Sign in
+					</button>
 				</div>
 			</form>
 		</>
