@@ -1,5 +1,10 @@
 @import '../../../styles/base_colors';
 
+.FormTitle {
+	font-size: 2rem;
+	font-weight: 300;
+}
+
 .FormContainer {
 	display: flex;
 	flex-direction: column;
@@ -8,36 +13,43 @@
 	width: 70%;
 }
 
-.FormCheckBox {
-	margin: 1rem 0;
-	width: 100%;
+.BtnContainer {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	justify-content: flex-start;
 	flex-wrap: wrap;
+	align-items: center;
+	width: 100%;
 
-	label span {
-		text-decoration: underline;
+	.SubmitBtn {
+		margin-top: 1rem;
+		background: $secondary_purple_color;
+		padding: 0.5rem 1rem;
+		border: 1px solid $primary_purple_color;
+		border-left: 3px solid darken($primary_purple_color, 10%);
+		border-bottom: 3px solid darken($primary_purple_color, 10%);
+		border-radius: 0.5rem;
+		color: white;
+		font-weight: 700;
+
+		&:hover,
+		&:focus {
+			background: lighten($secondary_purple_color, 10%);
+			border: 1px solid transparent;
+			border-left: 3px solid transparent;
+			border-bottom: 3px solid transparent;
+			cursor: pointer;
+			color: $primary_font_color;
+		}
 	}
-}
 
-.SubmitBtn {
-	background: $secondary_purple_color;
-	padding: 0.5rem 1rem;
-	border: 1px solid $primary_purple_color;
-	border-left: 3px solid darken($primary_purple_color, 10%);
-	border-bottom: 3px solid darken($primary_purple_color, 10%);
-	border-radius: 0.5rem;
-	color: white;
-	font-weight: 700;
-
-	&:hover,
-	&:focus {
-		background: lighten($secondary_purple_color, 10%);
-		border: 1px solid transparent;
-		border-left: 3px solid transparent;
-		border-bottom: 3px solid transparent;
-		cursor: pointer;
-		color: $primary_font_color;
+	.ChangeLink {
+		@extend .SubmitBtn;
+		background: transparent;
+		border: none;
+		&:hover,
+		&:focus {
+			background: transparent;
+			border: none;
+		}
 	}
 }

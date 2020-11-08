@@ -55,12 +55,18 @@ const RegisterUser = (props) => {
 						<span>terms and conditions</span>
 					</label>
 				</div>
-
-				<input
-					type="submit"
-					value="Sign up"
-					className={registerStyle.SubmitBtn}
-				/>
+				<div className={registerStyle.BtnContainer}>
+					<input
+						type="submit"
+						value="Sign up"
+						className={registerStyle.SubmitBtn}
+					/>
+					<input
+						type="button"
+						value="I'm already member"
+						className={registerStyle.ChangeLink}
+					/>
+				</div>
 			</form>
 		</>
 	);

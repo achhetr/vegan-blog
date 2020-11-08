@@ -31,11 +31,18 @@ const LoginUser = (props) => {
 			<form onSubmit={() => {}} className={loginStyle.FormContainer}>
 				<Input type="text" placeholder="Email address" />
 				<Input type="password" placeholder="Password" />
-				<input
-					type="submit"
-					value="Sign in"
-					className={loginStyle.SubmitBtn}
-				/>
+				<div className={loginStyle.BtnContainer}>
+					<input
+						type="submit"
+						value="Sign in"
+						className={loginStyle.SubmitBtn}
+					/>
+					<input
+						type="button"
+						value="I dont' have account"
+						className={loginStyle.ChangeLink}
+					/>
+				</div>
 			</form>
 		</>
 	);

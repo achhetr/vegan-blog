@@ -1,8 +1,9 @@
 @import '../../styles/base_colors';
 
 .InputContainer {
+	margin: 0.4rem 0;
 	width: 100%;
-	min-height: 50px;
+	min-height: 60px;
 	position: relative;
 	overflow: hidden;
 	border-bottom: 1px solid $primary_purple_color;
