@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { registerWithEmail } from '../../../redux-store/actions/auth';
 import Input from '../../Input/Input';
 import registerStyle from './register.module.scss';
 
-const RegisterUser = (props) => {
+const RegisterUser = () => {
+	const history = useHistory();
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
@@ -31,12 +34,9 @@ const RegisterUser = (props) => {
 		if (confirmPassword === password && password.length > 0 && email) {
 			dispatch(registerWithEmail({ email, password }));
 		} else {
-			alert('Check karo kuch');
+			alert('Something is incorrect');
 		}
 	};
-	useEffect(() => {
-		console.log('from register');
-	});
 
 	return (
 		<>
@@ -45,9 +45,27 @@ const RegisterUser = (props) => {
 				onSubmit={onSubmitRegister}
 				className={registerStyle.FormContainer}
 			>
-				<Input type="text" placeholder="Email address" />
-				<Input type="password" placeholder="Password" />
-				<Input type="password" placeholder="Confirm Password" />
+				<Input
+					type="text"
+					placeholder="Email address"
+					value={email}
+					onChange={emailHandler}
+					required={true}
+				/>
+				<Input
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={passwordHandler}
+					required={true}
+				/>
+				<Input
+					type="password"
+					placeholder="Confirm Password"
+					value={confirmPassword}
+					onChange={confirmPasswordHandler}
+					required={true}
+				/>
 				<div className={registerStyle.FormCheckBox}>
 					<input type="checkbox" id="condition" />
 					<label for="condition">
@@ -65,6 +83,9 @@ const RegisterUser = (props) => {
 						type="button"
 						value="I'm already member"
 						className={registerStyle.ChangeLink}
+						onClick={() => {
+							history.push('/login');
+						}}
 					/>
 				</div>
 			</form>
@@ -73,37 +94,3 @@ const RegisterUser = (props) => {
 };
 
 export default RegisterUser;
-
-{
-	/* <Input
-					id="input-email"
-					name="Email *"
-					type="email"
-					value={email}
-					onChange={emailHandler}
-					placeholder="Enter email"
-				/>
-				<Input
-					id="input-password"
-					name="Password *"
-					type="password"
-					value={password}
-					onChange={passwordHandler}
-					placeholder="Enter password"
-				/>
-
-				<Input
-					id="input-confirm-password"
-					name="Confirm Password *"
-					type="password"
-					value={confirmPassword}
-					onChange={confirmPasswordHandler}
-					placeholder="Enter password"
-				/>
-				<input
-					type="submit"
-					value="Sign Up"
-					className={registerStyle.BtnRegister}
-				/>
-			</form> */
-}

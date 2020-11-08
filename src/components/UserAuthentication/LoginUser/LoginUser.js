@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
 
 import Input from '../../Input/Input';
-import { loginWithEmail, logout } from '../../../redux-store/actions/auth';
+import { loginWithEmail } from '../../../redux-store/actions/auth';
 import loginStyle from './login.module.scss';
 
-const LoginUser = (props) => {
+const LoginUser = () => {
+	const history = useHistory();
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -29,9 +30,21 @@ const LoginUser = (props) => {
 	return (
 		<>
 			<h2>Sign in</h2>
-			<form onSubmit={() => {}} className={loginStyle.FormContainer}>
-				<Input type="text" placeholder="Email address" />
-				<Input type="password" placeholder="Password" />
+			<form onSubmit={onSubmitLogin} className={loginStyle.FormContainer}>
+				<Input
+					type="text"
+					placeholder="Email address"
+					value={email}
+					onChange={emailHandler}
+					required={true}
+				/>
+				<Input
+					type="password"
+					placeholder="Password"
+					value={password}
+					onChange={passwordHandler}
+					required={true}
+				/>
 				<div className={loginStyle.BtnContainer}>
 					<input
 						type="submit"
@@ -42,6 +55,9 @@ const LoginUser = (props) => {
 						type="button"
 						value="I dont' have account"
 						className={loginStyle.ChangeLink}
+						onClick={() => {
+							history.push('/register');
+						}}
 					/>
 				</div>
 
@@ -67,32 +83,3 @@ const LoginUser = (props) => {
 };
 
 export default LoginUser;
-
-{
-	/* <div className={loginStyle.Container}>
-<form onSubmit={onSubmitLogin}>
-	<input
-		id="input-email"
-		name="Enter Email"
-		type="text"
-		value={email}
-		onChange={emailHandler}
-		placeholder="Enter username"
-	/>
-	<input
-		type="password"
-		id="input-password"
-		name="Enter Password"
-		value={password}
-		onChange={passwordHandler}
-		placeholder="Enter password"
-	/>
-	<input
-		type="submit"
-		value="login"
-		className={loginStyle.BtnRegister}
-	/>
-</form>
-<button onClick={() => dispatch(logout())}>Sign out</button>
-</div> */
-}
