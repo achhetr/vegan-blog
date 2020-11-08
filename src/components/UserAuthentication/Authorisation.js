@@ -1,58 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import authStyle from './auth.module.scss';
 
-import { registerWithEmail } from '../../../redux-store/actions/auth';
-import Input from '../../Input/Input';
-import registerStyle from './register.module.scss';
+import LoginUser from './LoginUser/LoginUser';
+import RegisterUser from './RegisterUser/RegisterUser';
 
-const Authorisation = (props) => {
+const Authorisation = ({ login }) => {
 	return (
-		<div className={registerStyle.Container}>
-			<div className={registerStyle.LeftContainer}>
-				<h1 className={registerStyle.LeftContainerTitle}>
+		<div className={authStyle.Container}>
+			<div className={authStyle.LeftContainer}>
+				<h1 className={authStyle.LeftContainerTitle}>
 					Welcome to <span>Vegan World</span>
 				</h1>
-				<p className={registerStyle.LeftContainerContent}>
+				<p className={authStyle.LeftContainerContent}>
 					This community is currently with 50,000+ active users
 				</p>
 			</div>
-			<div className={registerStyle.RightContainer}></div>
+			<div className={authStyle.RightContainer}>
+				{login ? <LoginUser /> : <RegisterUser />}
+			</div>
 		</div>
 	);
 };
 
-export default RegisterUser;
-
-{
-	/* <Input
-					id="input-email"
-					name="Email *"
-					type="email"
-					value={email}
-					onChange={emailHandler}
-					placeholder="Enter email"
-				/>
-				<Input
-					id="input-password"
-					name="Password *"
-					type="password"
-					value={password}
-					onChange={passwordHandler}
-					placeholder="Enter password"
-				/>
-
-				<Input
-					id="input-confirm-password"
-					name="Confirm Password *"
-					type="password"
-					value={confirmPassword}
-					onChange={confirmPasswordHandler}
-					placeholder="Enter password"
-				/>
-				<input
-					type="submit"
-					value="Sign Up"
-					className={registerStyle.BtnRegister}
-				/>
-			</form> */
-}
+export default Authorisation;

@@ -7,8 +7,7 @@ import CreateBlog from '../Blog/CreateBlog/CreateBlog';
 import Blog from '../Blog/Blog';
 
 import PrivateRoute from '../../AppRouter/PrivateRoute';
-import LoginUser from '../UserAuthentication/LoginUser/LoginUser';
-import RegisterUser from '../UserAuthentication/RegisterUser/RegisterUser';
+import Authorisation from '../UserAuthentication/Authorisation';
 const MainApp = () => (
 	<BrowserRouter>
 		<Layout>
@@ -16,8 +15,14 @@ const MainApp = () => (
 				<PublicRoute exact path="/" component={HomePage} />
 				<PrivateRoute path="/create" component={CreateBlog} />
 				<PrivateRoute path="/blog" component={Blog} />
-				<PublicRoute path="/login" component={LoginUser} />
-				<PublicRoute path="/register" component={RegisterUser} />
+				<PublicRoute
+					path="/login"
+					component={() => <Authorisation login={true} />}
+				/>
+				<PublicRoute
+					path="/register"
+					component={() => <Authorisation login={false} />}
+				/>
 			</Switch>
 		</Layout>
 	</BrowserRouter>
