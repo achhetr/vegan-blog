@@ -1,6 +1,6 @@
 # Vegan Blog
 
-This is a Vegan Blog Project developed in React, Scss, Netlify (ci/cd). This project is proof of concept right now and working on feature delivery.
+This is a Vegan Blog Project developed in React, Scss, Netlify (ci/cd). This project is proof of concept (POC) right now and working on feature delivery.
 
 ## Installation
 
@@ -22,12 +22,11 @@ To run locally
 yarn start
 ```
 
-Go to link
-[vegan-blog](https://vegan-blog.netlify.app/)
-
 ## Contributing
 
-Pull requests are not welcome. This project will be private start-up project in future :)
+Website has gone private and soon repo will be private. Currently POC of the website is working.
+
+Live Link will be added soon (planning release early Jan 2021)
 
 ## License
 
